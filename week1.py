@@ -7,12 +7,21 @@
 # share URL to hack.md
 # check installation of python and jupyter notebooks
 
-#### Objectives ####
+#### Welcome ####
 
-# Course: overview of basic functionality of python (syntax, data manipulation, visualization)
+# instructor introduction
+# overview of fredhutch.io
+# sign in sheet
+# overview course philosophy, how to stay engaged
+# course objectives: overview of basic functionality of python (syntax, data manipulation, visualization)
+
+#### Objectives ####
 
 # Today:
 # Python and jupyter notebooks
+# operators, functions, and data types
+# sequences and dictionaries
+# defining functions
 
 #### Orientation to Python and projects ####
 
