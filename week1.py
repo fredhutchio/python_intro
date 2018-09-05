@@ -108,9 +108,9 @@ print(numbers)
 for num in numbers:
     print(num)
 
-# find help
-help(numbers) # on object
-numbers.append? # on function
+# find help on an object (can also check under help menu)
+?numbers # can also use help(numbers), but may not be useful to you right now
+help() # may give more than you want!
 
 # tuple: list with ordered sequence of elements; cannot be modified
 # surrounded by parentheses
