@@ -83,7 +83,7 @@ True or False
 True and False
 
 # built-in data types: strings, integers, floats
-text= "Fred Hutch"
+text = "Fred Hutch"
 number = 42
 pi_value = 3.1415
 
@@ -111,6 +111,10 @@ numbers[0]
 # add number to end of list
 numbers.append(4)
 print(numbers)
+# can use tab complete in notebook to see other options
+
+## Challenge: what google search could you use to determine a method for adding multiple values to a list?
+## Challenge: how do you remove items from a list?
 
 # for loop to access elements in list (or other data structure) one at a time
 for num in numbers:
@@ -174,5 +178,7 @@ print(z)
 
 #### Wrapping up ####
 
+# make sure work is saved
+# review how to get back into notebook
 # review objectives
 # preview next week's objectives
