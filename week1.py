@@ -83,7 +83,7 @@ text= "Data Carpentry"
 number = 42
 pi_value = 3.1415
 
-# find type of each using function
+# find type of each using function (type)
 type(text) # string: characters (letters, numbers, punctuation, emoji)
 type(number) # integer
 type(pi_value) # float
@@ -91,6 +91,8 @@ type(pi_value) # float
 # see value of something (required to display output in a script)
 print(text)
 print(11)
+
+# print and type are built in functions; there can also be methods (subset of functions) and user-defined functions
 
 #### Sequences ####
 
