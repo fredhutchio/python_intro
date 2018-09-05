@@ -92,11 +92,19 @@ type(text) # string: characters (letters, numbers, punctuation, emoji)
 type(number) # integer
 type(pi_value) # float
 
+# Convert a to an integer
+a = 7.83
+int(a)
+
+# Convert b to a float
+b = 7
+float(b)
+
 # see value of something (required to display output in a script)
 print(text)
 print(11)
 
-# demo in separate window
+# demo example.py in separate window
 
 # print and type are built in functions; there can also be methods (subset of functions) and user-defined functions
 
@@ -131,8 +139,8 @@ another_tuple = ('blue', 'green', 'red')
 a_list = [1, 2, 3]
 
 ## Challenge:
-# What happens when you execute: 
-a_list[1] = 5 
+# What happens when you execute:
+a_list[1] = 5
 a_tuple[2] = 5]
 # What does type(a_tuple) tell you about a_tuple?
 
