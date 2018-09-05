@@ -58,13 +58,17 @@
 #   web browser is how you interact with notebook
 #   navigate to project directory
 #   click "New" in upper right hand, then select "Python3"
-#   creates notebook (*.ipynb)
+#   creates notebook (*.ipynb, or ipython notebook file)
+#   autosaves, or can save manually
 #   click on title to rename
 # executing code in a jupyter notebook:
 #   enter code in cell and execute by pressing Shift + Return/enter
 #   output is printed directly below cell, prefaced by Out[ ]:
 #   add new cell with + button
+#   can add Markdown cells with nicely formatted text
+#   comments prefaced with # (not read/executed by python)
 #   commands and output saved in notebook
+#   example notebook: https://github.com/rasilab/machkovech_2018/blob/master/scripts/NA43_competition.ipynb
 
 #### Operators, functions, and data types ####
 
@@ -79,7 +83,7 @@ True or False
 True and False
 
 # built-in data types: strings, integers, floats
-text= "Data Carpentry"
+text= "Fred Hutch"
 number = 42
 pi_value = 3.1415
 
@@ -92,12 +96,14 @@ type(pi_value) # float
 print(text)
 print(11)
 
+# demo in separate window
+
 # print and type are built in functions; there can also be methods (subset of functions) and user-defined functions
 
 #### Sequences ####
 
 # lists: data structure that holds sequence of elements
-# can be referened by index (starts at 0)
+# can be referenced by index (starts at 0)
 # surrounded by square brackets
 numbers = [1, 2, 3]
 numbers[0]
@@ -112,14 +118,19 @@ for num in numbers:
 
 # find help on an object (can also check under help menu)
 ?numbers # can also use help(numbers), but may not be useful to you right now
-help() # may give more than you want!
 
 # tuple: list with ordered sequence of elements; cannot be modified
 # surrounded by parentheses
 a_tuple = (1, 2, 3)
 another_tuple = ('blue', 'green', 'red')
+# reminder: lists use square brackets
+a_list = [1, 2, 3]
 
-## Challenge
+## Challenge:
+# What happens when you execute: 
+a_list[1] = 5 
+a_tuple[2] = 5]
+# What does type(a_tuple) tell you about a_tuple?
 
 #### Dictionaries ####
 
@@ -145,6 +156,9 @@ for key in rev.keys():
     print(key, '->', rev[key])
 
 ## Challenge:
+# print the value of the rev dictionary to the screen
+# Reassign the second value (in the key value pair) so that it no longer reads “two” but instead “apple-sauce”
+# Print the value of rev to the screen again to see if the value has changed
 
 #### Functions ####
 
@@ -155,6 +169,8 @@ def add_function(a, b):
 
 z = add_function(20, 22)
 print(z)
+
+## Challenge: define a new function called subtract_function that subtracts d from c and test on numbers of your choice
 
 #### Wrapping up ####
 
