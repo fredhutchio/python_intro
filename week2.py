@@ -81,13 +81,13 @@ clinical_df['age_at_diagnosis'].count()
 # Group data by sex
 grouped_data = clinical_df.groupby('disease')
 
-# Summary statistics for all numeric columns by sex
+# Summary statistics for all numeric columns by disease
 grouped_data.describe()
-# Provide the mean for each numeric column by sex
+# Provide the mean for each numeric column by disease
 grouped_data.mean()
 
-# Count the number of samples by species
-disease_counts = clinical_df.groupby('disease')['race'].count()
+# Count the number of each race by disease
+disease_counts = clinical_df.groupby('race')['disease'].count()
 print(disease_counts)
 
 # count only rows with species "DO"
@@ -98,7 +98,7 @@ clinical_df['age_at_diagnosis']/365
 
 #### Visualizing data ####
 
-# Make sure figures appear inline in Ipython Notebook
+# Make sure figures appear inline in ipython Notebook
 %matplotlib inline
 # Create a quick bar chart
 disease_counts.plot(kind='bar');
