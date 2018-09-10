@@ -120,6 +120,7 @@ numbers[0]
 numbers.append(4)
 print(numbers)
 # can use tab complete in notebook to see other options
+# these options are called "attributes"
 
 ## Challenge: what google search could you use to determine a method for adding multiple values to a list?
 ## Challenge: how do you remove items from a list?
