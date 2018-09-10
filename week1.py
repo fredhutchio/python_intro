@@ -141,8 +141,12 @@ a_list = [1, 2, 3]
 ## Challenge:
 # What happens when you execute:
 a_list[1] = 5
-a_tuple[2] = 5]
+a_tuple[2] = 5
 # What does type(a_tuple) tell you about a_tuple?
+
+# Traceback is a multi-line error block printed
+# includes information on what error and where in code
+# comment out code error if you want to keep it for notes
 
 #### Dictionaries ####
 
@@ -150,12 +154,14 @@ a_tuple[2] = 5]
 translation = {'one': 1, 'two': 2}
 translation['one']
 
-# can't include lists
-bad = {[1, 2, 3]: 3}
-# Traceback is a multi-line error block printed out
+# can include lists as values
+list_value = {'yes': [1, 2, 3]}
+
+# cannot include lists as keys
+list_key = {[1, 2, 3]: 'nope'}
 
 # add items to dictionaries by assigning new value to key
-rev = {1: 'one', 2: 'two'}
+rev = {1: 'one', 2: 'two'} # different data types can be key, value
 rev[3] = 'three'
 rev
 
@@ -168,9 +174,9 @@ for key in rev.keys():
     print(key, '->', rev[key])
 
 ## Challenge:
-# print the value of the rev dictionary to the screen
+# print only the values of the rev dictionary to the screen
 # Reassign the second value (in the key value pair) so that it no longer reads “two” but instead “apple-sauce”
-# Print the value of rev to the screen again to see if the value has changed
+# Print the values of rev to the screen again to see if the value has changed
 
 #### Functions ####
 
