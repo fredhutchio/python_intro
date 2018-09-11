@@ -4,11 +4,12 @@
 
 #### Objectives ####
 
+# review previous week's objectives
 # Today:
-# selecting data using labels
-# summarizing data
-# sequences and dictionaries
-# defining functions
+#   conditional subsetting, grouping, and manipulating data
+#   visualizing data with matplotlib
+#   handling missing data
+#   saving data to files
 
 #### Getting set up ####
 
@@ -18,68 +19,58 @@ import pandas as pd
 # Read in the survey CSV
 clinical_df = pd.read_csv("data/clinical.csv") # import data as csv file
 
-# What does this do?
-clinical_df.loc[0, ['species_id', 'plot_id', 'weight']]
+#### Conditional subsetting, grouping, and manipulating data ####
 
 # conditional subsetting (using a criteria)
-clinical_df[clinical_df.year == 2002]
+clinical_df[clinical_df.year_of_birth == 1930]
 
 # not containing
-clinical_df[clinical_df.year != 2002]
+clinical_df[clinical_df.year_of_birth != 1930]
 
 # sets of criteria
-clinical_df[(clinical_df.year >= 1980) & (clinical_df.year <= 1985)]
+clinical_df[(clinical_df.year_of_birth >= 1930) & (clinical_df.year_of_birth <= 1940)]
 
-#### Summarizing data ####
-
+# identify number of unique elements in a column
 pd.unique(clinical_df['disease'])
 
-# calculate basic stats for all records in single column
-clinical_df['age_at_diagnosis'].describe()
-
-# each metric one at a time (only prints last if all executed in one cell!)
-clinical_df['age_at_diagnosis'].min()
-clinical_df['age_at_diagnosis'].max()
-clinical_df['age_at_diagnosis'].mean()
-clinical_df['age_at_diagnosis'].std()
-clinical_df['age_at_diagnosis'].count()
-
-# Group data by sex
+# Group data by disease
 grouped_data = clinical_df.groupby('disease')
 
 # Summary statistics for all numeric columns by disease
 grouped_data.describe()
-# Provide the mean for each numeric column by disease
-grouped_data.mean()
 
-# Count the number of each race by disease
-disease_counts = clinical_df.groupby('race')['disease'].count()
-print(disease_counts)
+# Count the number of each race
+clinical_df.groupby('race').count()
 
-# count only rows with species "DO"
-clinical_df.groupby('disease')['race'].count()['white']
+# see script-friendly output
+race_counts = clinical_df.groupby('race')['disease'].count()
+print(race_counts)
 
-# convert columns
-clinical_df['age_at_diagnosis']/365
+# only display disease column in output
+clinical_df.groupby('race')['disease'].count()
 
-#### Visualizing data ####
+# only display one race
+clinical_df.groupby('race')['disease'].count()['asian']
 
-# Make sure figures appear inline in ipython Notebook
-%matplotlib inline
-# Create a quick bar chart
-disease_counts.plot(kind='bar');
-
-total_count = clinical_df.groupby('disease')['site_of_resection_or_biopsy'].nunique()
-# Let's plot that too
-total_count.plot(kind='bar');
+## Challenge: Write code that will display:
+# the number of patients in this dataset who are listed as alive
+# the number of patients with breast cancer (BRCA)
 
 # isin function to find list of values
 #clinical_df[clinical_df['species_id'].isin([listGoesHere])]
 
-# can convert between data types, but is difficult without dealing with missing data
-# Convert the record_id field from an float to integer
-#clinical_df['age_at_diagnosis'] = clinical_df['age_at_diagnosis'].astype('int64')
-#clinical_df['record_id'].dtype
+#### Visualizing data with matplotlib ####
+
+# Make sure figures appear inline in ipython Notebook
+%matplotlib inline
+# Create a quick bar chart of number of patients with race known
+race_counts.plot(kind='bar');
+
+total_count = clinical_df.groupby('disease')['race'].nunique()
+# Let's plot that too
+total_count.plot(kind='bar');
+
+#### Missing data ####
 
 # check for missing data
 pd.isnull(clinical_df)
@@ -87,29 +78,38 @@ pd.isnull(clinical_df)
 # To select just the rows with NaN values, we can use the 'any()' method
 clinical_df[pd.isnull(clinical_df).any(axis=1)]
 
-# What does this do?
-empty_weights = clinical_df[pd.isnull(clinical_df['weight'])]['weight']
-print(empty_weights)
+# print all missing data in days to death
+empty_death = clinical_df[pd.isnull(clinical_df['days_to_death'])]['days_to_death']
+print(empty_death)
 
-len(clinical_df[pd.isnull(clinical_df.weight)])
-# How many rows have weight values?
-len(clinical_df[clinical_df.weight> 0])
+# count number of observations with missing data
+len(clinical_df[pd.isnull(clinical_df.days_to_death)])
 
+# count number of observations with days to death values
+len(clinical_df[clinical_df.days_to_death> 0])
+
+# create new copy of data frame to filter for missing data
 df1 = clinical_df.copy()
+
 # Fill all NaN values with 0
-df1['weight'] = df1['weight'].fillna(0)
+df1['days_to_death'] = df1['days_to_death'].fillna(0)
 
 # filling with 0 gives different answer!
-df1['weight'].mean()
+df1['days_to_death'].mean()
 
 # fill NaN with mean for all weight values
-df1['weight'] = clinical_df['weight'].fillna(clinical_df['weight'].mean())
+df1['days_to_death'] = clinical_df['days_to_death'].fillna(clinical_df['days_to_death'].mean())
 
 # write data to csv
 clinical_df = pd.read_csv("data/clinical.csv")
 
 # exclude any observation with missing data
 df_na = clinical_df.dropna()
+
+# can convert between data types, but is difficult without dealing with missing data
+# Convert the record_id field from an float to integer
+#clinical_df['age_at_diagnosis'] = clinical_df['age_at_diagnosis'].astype('int64')
+#clinical_df['record_id'].dtype
 
 # Write DataFrame to CSV
 df_na.to_csv('data/clinical_complete.csv', index=False)

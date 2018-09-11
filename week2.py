@@ -10,10 +10,11 @@
 
 # review previous week's objectives
 # Today:
-#   principles of tidy data
-#   importing data using python
-#   subsetting data
-#   selecting columns
+#   using packages
+#   tidy data and importing data to python
+#   selecting data using labels (columns) and rows
+#   slicing subsets of rows and columns
+#   calculating summary statistics
 
 #### Using packages ####
 
@@ -46,7 +47,9 @@ clinical_df = pd.read_csv("data/clinical.csv")
 # preview data import
 clinical_df.head() # print top few rows
 
-## Challenge: import of clinical.txt and clinical.tsv
+## Challenge: What do you need to do to import the following files correctly:
+#clinical.tsv
+#clinical.txt
 
 # examine data import
 type(clinical_df) # look at data type
@@ -62,7 +65,22 @@ clinical_df.dtypes # look at type of data in each column
 # float64 = float
 # datetime64 = N/A
 
-#### Subsetting data ####
+#### Selecting data using labels (columns) and row ranges ####
+
+# select a 'subset' of the data using the column name
+clinical_df['tumor_stage']
+clinical_df['primary_diagnosis'].dtype # single column, O stands for "object"
+
+# use the column name as an 'attribute'; gives the same output
+clinical_df.tumor_stage
+
+# What happens if you ask for a column that doesn't exist?
+#clinical_df['tumorstage']
+
+# Select two columns at once
+clinical_df[['tumor_stage', 'vital_status']]
+
+## Challenge: does the order of the columns you list matter?
 
 # Select rows 0, 1, 2 (row 3 is not selected)
 clinical_df[0:3]
@@ -71,72 +89,66 @@ clinical_df[0:3]
 clinical_df[:5]
 
 # Select the last element in the list
-# (the slice starts at the last element, and ends at the end of the list)
 clinical_df[-1:]
 
-# copying objects is different than referencing
+## Challenge: how would you extract the last 10 rows of the dataset?
+
+#### Copying vs referencing objects ####
+
+# Using the '=' operator references the previous object
+ref_clinical_df = clinical_df
+
 # Using the 'copy() method': actually creates another object
 true_copy_clinical_df = clinical_df.copy()
-
-# Using the '=' operator only references the previous object
-ref_clinical_df = clinical_df
 
 # Assign the value `0` to the first three rows of data in the DataFrame
 ref_clinical_df[0:3] = 0
 
-## Challenge: what happens to the following two data frames?
-
+## Challenge: What is the difference between ref_clinical_df and clinical_df?
 # ref_clinical_df was created using the '=' operator
 ref_clinical_df.head()
-
 # clinical_df is the original dataframe
 clinical_df.head()
 
-# slicing subsets of rows and columns
+# re-load fresh copy of object
+clinical_df = pd.read_csv("data/clinical.csv")
 
-# iloc[row slicing, column slicing]
-clinical_df.iloc[0:3, 1:4]
+#### Slicing subsets of rows and columns ####
 
-# Select all columns for rows of index values 0 and 10
-clinical_df.loc[[0, 10], :]
-
-# What happens when you type the code below?
-clinical_df.loc[[0, 10, 35549], :]
-
+# iloc is integer indexing [row slicing, column slicing]
 # locate specific data element
 clinical_df.iloc[2, 6]
 
-#### Selecting data using labels ####
+# select range of data
+clinical_df.iloc[0:3, 1:4]
+# select rows 0, 1, 2; up to but not including 3
+# select rows 1, 2, 3; up to but not including 4
 
-# select data using labels: two ways
-# Method 1: select a 'subset' of the data using the column name
-clinical_df['tumor_stage']
-clinical_df['primary_diagnosis'].dtype # single column, O stands for "object"
+# loc is for label indexing (integers interpreted as labels)
+# start and stop bound are inclusive
+clinical_df.loc[0: ]
 
-# Method 2: use the column name as an 'attribute'; gives the same output
-clinical_df.tumor_stage
+# Select all columns for rows of index values specified
+clinical_df.loc[[0, 10, 6831], :]
 
-# save `tumor_stage` column to object
-clinical_species = clinical_df['tumor_stage']
+# select all rows for specified columns
+clinical_df.loc[0, ['primary_diagnosis', 'tumor_stage', 'age_at_diagnosis']]
 
-# Select two columns from the DataFrame
-clinical_df[['tumor_stage', 'vital_status']]
+## Challenge: why doesn't the following code work?
+#clinical_df.loc[2, 6]
 
-# What happens when you flip the order?
-clinical_df[['vital_status', 'tumor_stage']]
-
-# What happens if you ask for a column that doesn't exist?
-#clinical_df['tumorstage']
+#### Calculating summary statistics ####
 
 # calculate basic stats for all records in single column
 clinical_df['age_at_diagnosis'].describe()
 
 # each metric one at a time (only prints last if all executed in one cell!)
 clinical_df['age_at_diagnosis'].min()
-clinical_df['age_at_diagnosis'].max()
-clinical_df['age_at_diagnosis'].mean()
-clinical_df['age_at_diagnosis'].std()
-clinical_df['age_at_diagnosis'].count()
+
+# convert columns
+clinical_df['age_at_diagnosis']/365
+
+## Challenge: How would you extract only the standard deviation for days to death?
 
 #### Wrapping up ####
 
