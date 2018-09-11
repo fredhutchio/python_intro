@@ -5,8 +5,8 @@
 #### Objectives ####
 
 # Today:
-# import dataset
-# operators, functions, and data types
+# selecting data using labels
+# summarizing data
 # sequences and dictionaries
 # defining functions
 
@@ -16,102 +16,86 @@
 import pandas as pd
 
 # Read in the survey CSV
-surveys_df = pd.read_csv("data/surveys.csv")
-
-#### Selecting data using labels ####
-
-# select data using labels: two ways
-# Method 1: select a 'subset' of the data using the column name
-surveys_df['species_id']
-
-# Method 2: use the column name as an 'attribute'; gives the same output
-surveys_df.species_id
-
-# save `species_id` column to object
-surveys_species = surveys_df['species_id']
-
-# Select the species and plot columns from the DataFrame
-surveys_df[['species_id', 'plot_id']]
-
-# What happens when you flip the order?
-surveys_df[['plot_id', 'species_id']]
-
-# What happens if you ask for a column that doesn't exist?
-#surveys_df['speciess']
-
-# slicing rows
-# Select rows 0, 1, 2 (row 3 is not selected)
-surveys_df[0:3]
-
-# Select the first 5 rows (rows 0, 1, 2, 3, 4)
-surveys_df[:5]
-
-# Select the last element in the list
-# (the slice starts at the last element, and ends at the end of the list)
-surveys_df[-1:]
-
-# copying objects is different than referencing
-# Using the 'copy() method': actually creates another object
-true_copy_surveys_df = surveys_df.copy()
-
-# Using the '=' operator only references the previous object
-ref_surveys_df = surveys_df
-
-# Assign the value `0` to the first three rows of data in the DataFrame
-ref_surveys_df[0:3] = 0
-
-# what happens to the following two data frames?
-
-# ref_surveys_df was created using the '=' operator
-ref_surveys_df.head()
-
-# surveys_df is the original dataframe
-surveys_df.head()
-
-# slicing subsets of rows and columns
-
-# iloc[row slicing, column slicing]
-surveys_df.iloc[0:3, 1:4]
-
-# Select all columns for rows of index values 0 and 10
-surveys_df.loc[[0, 10], :]
+clinical_df = pd.read_csv("data/clinical.csv") # import data as csv file
 
 # What does this do?
-surveys_df.loc[0, ['species_id', 'plot_id', 'weight']]
-
-# What happens when you type the code below?
-surveys_df.loc[[0, 10, 35549], :]
-
-# locate specific data element
-surveys_df.iloc[2, 6]
+clinical_df.loc[0, ['species_id', 'plot_id', 'weight']]
 
 # conditional subsetting (using a criteria)
-surveys_df[surveys_df.year == 2002]
+clinical_df[clinical_df.year == 2002]
 
 # not containing
-surveys_df[surveys_df.year != 2002]
+clinical_df[clinical_df.year != 2002]
 
 # sets of criteria
-surveys_df[(surveys_df.year >= 1980) & (surveys_df.year <= 1985)]
+clinical_df[(clinical_df.year >= 1980) & (clinical_df.year <= 1985)]
+
+#### Summarizing data ####
+
+pd.unique(clinical_df['disease'])
+
+# calculate basic stats for all records in single column
+clinical_df['age_at_diagnosis'].describe()
+
+# each metric one at a time (only prints last if all executed in one cell!)
+clinical_df['age_at_diagnosis'].min()
+clinical_df['age_at_diagnosis'].max()
+clinical_df['age_at_diagnosis'].mean()
+clinical_df['age_at_diagnosis'].std()
+clinical_df['age_at_diagnosis'].count()
+
+# Group data by sex
+grouped_data = clinical_df.groupby('disease')
+
+# Summary statistics for all numeric columns by disease
+grouped_data.describe()
+# Provide the mean for each numeric column by disease
+grouped_data.mean()
+
+# Count the number of each race by disease
+disease_counts = clinical_df.groupby('race')['disease'].count()
+print(disease_counts)
+
+# count only rows with species "DO"
+clinical_df.groupby('disease')['race'].count()['white']
+
+# convert columns
+clinical_df['age_at_diagnosis']/365
+
+#### Visualizing data ####
+
+# Make sure figures appear inline in ipython Notebook
+%matplotlib inline
+# Create a quick bar chart
+disease_counts.plot(kind='bar');
+
+total_count = clinical_df.groupby('disease')['site_of_resection_or_biopsy'].nunique()
+# Let's plot that too
+total_count.plot(kind='bar');
 
 # isin function to find list of values
-#surveys_df[surveys_df['species_id'].isin([listGoesHere])]
+#clinical_df[clinical_df['species_id'].isin([listGoesHere])]
+
+# can convert between data types, but is difficult without dealing with missing data
+# Convert the record_id field from an float to integer
+#clinical_df['age_at_diagnosis'] = clinical_df['age_at_diagnosis'].astype('int64')
+#clinical_df['record_id'].dtype
 
 # check for missing data
-pd.isnull(surveys_df)
+pd.isnull(clinical_df)
 
 # To select just the rows with NaN values, we can use the 'any()' method
-surveys_df[pd.isnull(surveys_df).any(axis=1)]
+clinical_df[pd.isnull(clinical_df).any(axis=1)]
 
 # What does this do?
-empty_weights = surveys_df[pd.isnull(surveys_df['weight'])]['weight']
+empty_weights = clinical_df[pd.isnull(clinical_df['weight'])]['weight']
 print(empty_weights)
 
-len(surveys_df[pd.isnull(surveys_df.weight)])
+len(clinical_df[pd.isnull(clinical_df.weight)])
 # How many rows have weight values?
-len(surveys_df[surveys_df.weight> 0])
+len(clinical_df[clinical_df.weight> 0])
 
-df1 = surveys_df.copy()
+df1 = clinical_df.copy()
 # Fill all NaN values with 0
 df1['weight'] = df1['weight'].fillna(0)
 
@@ -119,16 +103,16 @@ df1['weight'] = df1['weight'].fillna(0)
 df1['weight'].mean()
 
 # fill NaN with mean for all weight values
-df1['weight'] = surveys_df['weight'].fillna(surveys_df['weight'].mean())
+df1['weight'] = clinical_df['weight'].fillna(clinical_df['weight'].mean())
 
 # write data to csv
-surveys_df = pd.read_csv("data/surveys.csv")
+clinical_df = pd.read_csv("data/clinical.csv")
 
 # exclude any observation with missing data
-df_na = surveys_df.dropna()
+df_na = clinical_df.dropna()
 
 # Write DataFrame to CSV
-df_na.to_csv('data/surveys_complete.csv', index=False)
+df_na.to_csv('data/clinical_complete.csv', index=False)
 
 #### Wrapping up ####
 
