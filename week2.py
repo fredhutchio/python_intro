@@ -137,6 +137,8 @@ clinical_df.loc[0, ['primary_diagnosis', 'tumor_stage', 'age_at_diagnosis']]
 ## Challenge: why doesn't the following code work?
 #clinical_df.loc[2, 6]
 
+## Challenge: how would you extract the last 100 rows for only vital status and days to death?
+
 #### Calculating summary statistics ####
 
 # calculate basic stats for all records in single column
