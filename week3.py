@@ -96,6 +96,7 @@ df1['days_to_death'] = df1['days_to_death'].fillna(0)
 
 # filling with 0 gives different answer!
 df1['days_to_death'].mean()
+clinical_df['days_to_death'].mean()
 
 # fill NaN with mean for all weight values
 df1['days_to_death'] = clinical_df['days_to_death'].fillna(clinical_df['days_to_death'].mean())
