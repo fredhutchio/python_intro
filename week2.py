@@ -4,7 +4,7 @@
 
 #### Before class ####
 
-# share URL to hack.md with link to dataset to download
+# share URL to hack.md with link to zipped dataset file to download
 
 #### Objectives ####
 
@@ -18,6 +18,9 @@
 
 #### Using packages ####
 
+# make sure everyone is working in project directory
+# create new notebook for this week's material
+
 # defining packages
 #   collection of functions
 #   community contributed
@@ -28,6 +31,9 @@
 import pandas as pd
 
 #### Importing data ####
+
+# show where to download data
+# emphasize unzipping directory and moving data to appropriate location
 
 # appropriate composition of data into tables still isn't commonly taught!
 # overview of tidy data principles
@@ -69,7 +75,7 @@ clinical_df.dtypes # look at type of data in each column
 
 # select a 'subset' of the data using the column name
 clinical_df['tumor_stage']
-clinical_df['primary_diagnosis'].dtype # single column, O stands for "object"
+clinical_df['tumor_stage'].dtype # single column, O stands for "object"
 
 # use the column name as an 'attribute'; gives the same output
 clinical_df.tumor_stage
@@ -85,11 +91,11 @@ clinical_df[['tumor_stage', 'vital_status']]
 # Select rows 0, 1, 2 (row 3 is not selected)
 clinical_df[0:3]
 
-# Select the first 5 rows (rows 0, 1, 2, 3, 4)
-clinical_df[:5]
+# Select row 2 to the end
+clinical_df[1:]
 
 # Select the last element in the list
-clinical_df[-1:]
+clinical_df[-1:] # what does this mean in the context of indexing?
 
 ## Challenge: how would you extract the last 10 rows of the dataset?
 
