@@ -13,6 +13,8 @@
 
 #### Getting set up ####
 
+# make sure folks are working in project directory with data/
+
 # Make sure pandas is loaded
 import pandas as pd
 
@@ -42,27 +44,36 @@ grouped_data.describe()
 # Count the number of each race
 clinical_df.groupby('race').count()
 
-# see script-friendly output
-race_counts = clinical_df.groupby('race')['disease'].count()
-print(race_counts)
-
 # only display disease column in output
 clinical_df.groupby('race')['disease'].count()
 
 # only display one race
 clinical_df.groupby('race')['disease'].count()['asian']
 
+# save output to object for later use
+race_counts = clinical_df.groupby('race')['disease'].count()
+print(race_counts) # see script-friendly output
+
 ## Challenge: Write code that will display:
 # the number of patients in this dataset who are listed as alive
 # the number of patients with breast cancer (BRCA)
 
 # isin function to find list of values
-#clinical_df[clinical_df['species_id'].isin([listGoesHere])]
+# create list of desired values
+dis_list = ['UCS', 'MESO']
+# extract values
+clinical_df[clinical_df['disease'].isin(dis_list)]
+
+# you don't have to save the list object separately!
+clinical_df[clinical_df['disease'].isin(['UCS', 'MESO'])]
+
+## Challenge: extract only data for Stage I and Stage II patients
 
 #### Visualizing data with matplotlib ####
 
-# Make sure figures appear inline in ipython Notebook
+# Make sure figures appear inline in notebook
 %matplotlib inline
+
 # Create a quick bar chart of number of patients with race known
 race_counts.plot(kind='bar');
 
@@ -72,15 +83,24 @@ total_count.plot(kind='bar');
 
 #### Missing data ####
 
+# mask: method of indicating missing values, as with separate array indicating which values to exclude
+#   set true/false criteria
+#   assess each value in object to see if it meets criteria
+#   creates output object that is same shape as original, but with Boolean values
+
 # check for missing data
 pd.isnull(clinical_df)
 
 # To select just the rows with NaN values, we can use the 'any()' method
 clinical_df[pd.isnull(clinical_df).any(axis=1)]
+# How could we extract all values WITHOUT missing data?
 
-# print all missing data in days to death
-empty_death = clinical_df[pd.isnull(clinical_df['days_to_death'])]['days_to_death']
-print(empty_death)
+# filtering for any missing data cuts out a lot of the dataset
+# exclude all missing data in days to death
+filtered_death = clinical_df[pd.isnull(clinical_df['days_to_death'])]['days_to_death']
+print(filtered_death)
+# masks can be applied to lots of other conditions!
+
 
 # count number of observations with missing data
 len(clinical_df[pd.isnull(clinical_df.days_to_death)])
