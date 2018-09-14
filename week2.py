@@ -110,11 +110,12 @@ true_copy_clinical_df = clinical_df.copy()
 # Assign the value `0` to the first three rows of data in the DataFrame
 ref_clinical_df[0:3] = 0
 
-## Challenge: What is the difference between ref_clinical_df and clinical_df?
-# ref_clinical_df was created using the '=' operator
-ref_clinical_df.head()
-# clinical_df is the original dataframe
-clinical_df.head()
+## Challenge: How and why are the following three objects different?
+# Hint: try applying head()
+clinical_df.head() # has been modified because ref_clinical_df referenced it
+ref_clinical_df.head() # was actually altered
+true_copy_clinical_df.head() # actual copy of original, unaltered
+# reinforce that the order of operations matters!
 
 # re-load fresh copy of object
 clinical_df = pd.read_csv("data/clinical.csv")
