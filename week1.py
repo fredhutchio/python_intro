@@ -112,6 +112,9 @@ print(11)
 
 # print and type are built in functions; there can also be methods (subset of functions) and user-defined functions
 
+# find help on a function
+help(print)
+
 #### Sequences ####
 
 # lists: data structure that holds sequence of elements
@@ -120,11 +123,14 @@ print(11)
 numbers = [1, 2, 3]
 numbers[0]
 
+# find help on an object (can also check under help menu)
+?numbers # can also use help(numbers), but may not be useful to you right now
+
 # add number to end of list
-numbers.append(4)
+numbers.append(4) # append() is an attribute
 print(numbers)
 # can use tab complete in notebook to see other options
-# these options are called "attributes"
+?numbers.append # find help for attribute
 
 ## Challenge: what google search could you use to determine a method for adding multiple values to a list?
 ## Challenge: how do you remove items from a list?
@@ -132,9 +138,6 @@ print(numbers)
 # for loop to access elements in list (or other data structure) one at a time
 for num in numbers:
     print(num)
-
-# find help on an object (can also check under help menu)
-?numbers # can also use help(numbers), but may not be useful to you right now
 
 # tuple: list with ordered sequence of elements; cannot be modified
 # surrounded by parentheses
@@ -145,8 +148,8 @@ a_list = [1, 2, 3]
 
 ## Challenge:
 # What happens when you execute:
-a_list[1] = 5
-a_tuple[2] = 5
+#a_list[1] = 5
+#a_tuple[2] = 5
 # What does type(a_tuple) tell you about a_tuple?
 
 # Traceback is a multi-line error block printed
