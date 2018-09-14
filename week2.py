@@ -166,8 +166,14 @@ clinical_df['age_at_diagnosis'].min()
 
 # convert columns
 clinical_df['age_at_diagnosis']/365
+# convert min to days
+clinical_df['age_at_diagnosis'].min()/365
+
+## Challenge: What type of summary stats do you get for object data?
+clinical_df['site_of_resection_or_biopsy'].describe()
 
 ## Challenge: How would you extract only the standard deviation for days to death?
+clinical_df['days_to_death'].std()
 
 #### Wrapping up ####
 
