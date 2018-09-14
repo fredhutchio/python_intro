@@ -55,21 +55,20 @@ clinical_df.head() # print top few rows
 
 ## Challenge: What do you need to do to import the following files correctly:
 #clinical.tsv
+pd.read_csv("../data/clinical.tsv", sep='\t')
 #clinical.txt
+pd.read_csv("../data/clinical.txt", sep=' ')
 
 # examine data import
 type(clinical_df) # look at data type
 clinical_df.columns # view column names
 clinical_df.dtypes # look at type of data in each column
 
-# numeric and text data types
-# Int64 stands for 64 bit integer
-
-# text data type: pandas vs native python
-# object = string
-# int64 = int
-# float64 = float
-# datetime64 = N/A
+## Data types: pandas vs native python
+# * object = string
+# * int64 = integer (64 bit)
+# * float64 = float
+# * datetime64 = N/A
 
 #### Selecting data using labels (columns) and row ranges ####
 
@@ -82,6 +81,8 @@ clinical_df['tumor_stage'].dtype # single column, O stands for "object"
 
 # use the column name as an 'attribute'; gives the same output
 clinical_df.tumor_stage
+# head still works here!
+clinical_df.tumor_stage.head()
 
 # What happens if you ask for a column that doesn't exist?
 #clinical_df['tumorstage']
@@ -114,6 +115,7 @@ true_copy_clinical_df = clinical_df.copy()
 
 # Assign the value `0` to the first three rows of data in the DataFrame
 ref_clinical_df[0:3] = 0
+# note: you probably wouldn't want to actually *do* this to your data!
 
 ## Challenge: How and why are the following three objects different?
 # Hint: try applying head()
