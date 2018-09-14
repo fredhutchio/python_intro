@@ -96,11 +96,13 @@ type(pi_value) # float
 
 # Convert a to an integer
 a = 7.83
-int(a)
+type(a)
+int(a) # decimals removed
 
 # Convert b to a float
 b = 7
-float(b)
+type(b)
+float(b) # decimals added
 
 # see value of something (required to display output in a script)
 print(text)
