@@ -75,6 +75,9 @@ clinical_df.dtypes # look at type of data in each column
 
 # select a 'subset' of the data using the column name
 clinical_df['tumor_stage']
+# show only the first few rows of output
+clinical_df['tumor_stage'].head()
+# show data type for this row
 clinical_df['tumor_stage'].dtype # single column, O stands for "object"
 
 # use the column name as an 'attribute'; gives the same output
@@ -85,6 +88,8 @@ clinical_df.tumor_stage
 
 # Select two columns at once
 clinical_df[['tumor_stage', 'vital_status']]
+# double brackets are part of normal python syntax;
+# they reference parts of lists, which can represent more complex data structures
 
 ## Challenge: does the order of the columns you list matter?
 
@@ -128,23 +133,28 @@ clinical_df.iloc[2, 6]
 
 # select range of data
 clinical_df.iloc[0:3, 1:4]
-# select rows 0, 1, 2; up to but not including 3
-# select rows 1, 2, 3; up to but not including 4
+# stop/end bound is NOT inclusive (e.g., up to but not including 3)
+# can use empty stop boundary to indicate end of data
+clinical_df.iloc[0:, 1:4]
 
 # loc is for label indexing (integers interpreted as labels)
 # start and stop bound are inclusive
-clinical_df.loc[0: ]
+clinical_df.loc[1:4]
+# can use empty stop boundary to indicate end of data
+clinical_df.loc[1: ]
 
 # Select all columns for rows of index values specified
-clinical_df.loc[[0, 10, 6831], :]
+clinical_df.loc[[0, 10, 6831], ]
 
-# select all rows for specified columns
+# select first row for specified columns
 clinical_df.loc[0, ['primary_diagnosis', 'tumor_stage', 'age_at_diagnosis']]
 
 ## Challenge: why doesn't the following code work?
 #clinical_df.loc[2, 6]
 
 ## Challenge: how would you extract the last 100 rows for only vital status and days to death?
+clinical_df.loc[6732:, ['vital_status', 'days_to_death']]
+clinical_df.iloc[-100:, [3,5]]
 
 #### Calculating summary statistics ####
 
