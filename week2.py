@@ -35,6 +35,10 @@ import pandas as pd
 # show where to download data
 # emphasize unzipping directory and moving data to appropriate location
 
+# import data as csv
+pd.read_csv("data/clinical.csv")
+# this only prints it to the screen!
+
 # appropriate composition of data into tables still isn't commonly taught!
 # overview of tidy data principles
 #   columns: variables
@@ -42,10 +46,6 @@ import pandas as pd
 #   one piece of info per cell
 # csv: comma separated values (other things besides commas can have separators too though)
 # describe data and where it came from
-
-# import data as csv
-pd.read_csv("data/clinical.csv")
-# this only prints it to the screen!
 
 # assign data to object
 clinical_df = pd.read_csv("data/clinical.csv")
