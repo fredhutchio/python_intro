@@ -179,3 +179,4 @@ clinical_df['days_to_death'].std()
 
 # review objectives
 # preview next week's objectives
+# demo of spyder IDE, if time allows
