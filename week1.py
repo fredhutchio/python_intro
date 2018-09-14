@@ -68,6 +68,7 @@
 #   can add Markdown cells with nicely formatted text
 #   comments prefaced with # (not read/executed by python)
 #   commands and output saved in notebook
+#   talk about other menu options and buttons to remove/add/run cells
 #   example notebook: https://github.com/rasilab/machkovech_2018/blob/master/scripts/NA43_competition.ipynb
 
 #### Operators, functions, and data types ####
