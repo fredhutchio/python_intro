@@ -20,6 +20,9 @@ import pandas as pd
 
 # Read in the survey CSV
 clinical_df = pd.read_csv("data/clinical.csv") # import data as csv file
+# inspect output
+clinical_df.head()
+len(clinical_df)
 
 #### Conditional subsetting, grouping, and manipulating data ####
 
@@ -58,17 +61,6 @@ print(race_counts) # see script-friendly output
 # the number of patients in this dataset who are listed as alive
 # the number of patients with breast cancer (BRCA)
 
-# isin function to find list of values
-# create list of desired values
-dis_list = ['UCS', 'MESO']
-# extract values
-clinical_df[clinical_df['disease'].isin(dis_list)]
-
-# you don't have to save the list object separately!
-clinical_df[clinical_df['disease'].isin(['UCS', 'MESO'])]
-
-## Challenge: extract only data for Stage I and Stage II patients
-
 #### Visualizing data with matplotlib ####
 
 # Make sure figures appear inline in notebook
@@ -76,43 +68,54 @@ clinical_df[clinical_df['disease'].isin(['UCS', 'MESO'])]
 
 # Create a quick bar chart of number of patients with race known
 race_counts.plot(kind='bar');
+# the semicolon suppresses the output, allowing the plot to show
 
-total_count = clinical_df.groupby('disease')['race'].nunique()
-# Let's plot that too
+## Challenge:
+# create a new object called total_count that counts the number of samples for each cancer type
+total_count = clinical_df.groupby('disease')['race'].count()
+# plot the number of samples for each cancer type
 total_count.plot(kind='bar');
 
 #### Missing data ####
 
-# mask: method of indicating missing values, as with separate array indicating which values to exclude
+# two methods: masking and replacing missing data with zeros
+
+## mask: method of indicating missing values, as with separate array indicating which values to exclude
 #   set true/false criteria
 #   assess each value in object to see if it meets criteria
 #   creates output object that is same shape as original, but with Boolean values
+#   masks can be applied to lots of other conditions!
 
-# check for missing data
+# check for missing data anywhere in dataset
 pd.isnull(clinical_df)
 
-# To select just the rows with NaN values, we can use the 'any()' method
+# select just the rows with NaN values
 clinical_df[pd.isnull(clinical_df).any(axis=1)]
+# count how many rows have missing data
+len(clinical_df[pd.isnull(clinical_df).any(axis=1)])
+
 # How could we extract all values WITHOUT missing data?
+clinical_df[-pd.isnull(clinical_df).any(axis=1)]
+len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
+# filtering for any missing data cuts out a lot of the dataset!
 
-# filtering for any missing data cuts out a lot of the dataset
-# exclude all missing data in days to death
-filtered_death = clinical_df[pd.isnull(clinical_df['days_to_death'])]['days_to_death']
-print(filtered_death)
-# masks can be applied to lots of other conditions!
+# exclude missing data in only days to death
+clinical_df[-pd.isnull(clinical_df['cigarettes_per_day'])]
 
+# save masked results to new object
+smoke_complete = clinical_df[-pd.isnull(clinical_df['cigarettes_per_day'])]
+# apply additional filter for age at diagnosis
+smoke_complete = smoke_complete[smoke_complete.age_at_diagnosis > 0]
+# save filtered data to file
+smoke_complete.to_csv('data/smoke_complete.csv', index=False)
 
-# count number of observations with missing data
-len(clinical_df[pd.isnull(clinical_df.days_to_death)])
-
-# count number of observations with days to death values
-len(clinical_df[clinical_df.days_to_death> 0])
+## replace missing data 
 
 # create new copy of data frame to filter for missing data
 df1 = clinical_df.copy()
 
 # Fill all NaN values with 0
-df1['days_to_death'] = df1['days_to_death'].fillna(0)
+df1['age_at_diagnosis'] = df1['age_at_diagnosis'].fillna(0)
 
 # filling with 0 gives different answer!
 df1['days_to_death'].mean()
