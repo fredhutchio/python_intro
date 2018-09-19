@@ -98,7 +98,7 @@ len(clinical_df[pd.isna(clinical_df).any(axis=1)]) # an alias of isnull()
 # How could we extract all values WITHOUT missing data?
 clinical_df[-pd.isnull(clinical_df).any(axis=1)]
 clinical_df[pd.notna(clinical_df).any(axis=1)] # alternative way of selecting non-missing data
-clinical_df.dropna() # let another way
+clinical_df.dropna() # yet another way
 len(clinical_df.dropna())
 # filtering for any missing data cuts out a lot of the dataset!
 
@@ -133,8 +133,8 @@ birth_replace['year_of_birth'] = birth_replace['year_of_birth'].fillna(birth_rep
 
 # can convert between data types, but is difficult without dealing with missing data
 # convert the age_at_diagnosis from an float to integer
-birth_reduced['year_of_birth'] = birth_reduced['year_of_birth'].astype('int64')
-birth_reduced['year_of_birth'].dtype
+birth_replace['year_of_birth'] = birth_replace['year_of_birth'].astype('int64')
+birth_replace['year_of_birth'].dtype
 
 ## use masking to create second dataframe for next week
 
@@ -155,9 +155,9 @@ pd.unique(birth_reduced['vital_status'])
 birth_reduced.groupby('disease').count()
 
 # create list of desired values
-dis_list = [LGG', 'UCEC', 'GBM', 'LUSC', 'BRCA']
+dis_list = ['LGG', 'UCEC', 'GBM', 'LUSC', 'BRCA']
 # extract values
-birth_reduced[birth_reduced['disease'].isin(dis_list)]
+birth_reduced = birth_reduced[birth_reduced['disease'].isin(dis_list)]
 
 # write data to csv
 birth_reduced.to_csv('data/birth_reduced.csv', index=False)
@@ -166,3 +166,4 @@ birth_reduced.to_csv('data/birth_reduced.csv', index=False)
 
 # review objectives
 # preview next week's objectives
+# demo use of Atom + Hydrogen to code in Python
