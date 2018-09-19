@@ -92,10 +92,11 @@ pd.isnull(clinical_df)
 # select just the rows with NaN values
 clinical_df[pd.isnull(clinical_df).any(axis=1)]
 # count how many rows have missing data
-len(clinical_df[pd.isnull(clinical_df).any(axis=1)])
+len(clinical_df[pd.isna(clinical_df).any(axis=1)])
 
 # How could we extract all values WITHOUT missing data?
 clinical_df[-pd.isnull(clinical_df).any(axis=1)]
+clinical_df[pd.notna(clinical_df).any(axis=1)] # alternative way of selecting non-missing data
 len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
 # filtering for any missing data cuts out a lot of the dataset!
 
@@ -109,23 +110,30 @@ smoke_complete = smoke_complete[smoke_complete.age_at_diagnosis > 0]
 # save filtered data to file
 smoke_complete.to_csv('data/smoke_complete.csv', index=False)
 
-## replace missing data 
+## replace missing data in copied data frame
 
-# create new copy of data frame to filter for missing data
-df1 = clinical_df.copy()
+birth_reduced
+year_of_birth
+vital_status (not reported)
+frequent diseases
+
+
+# create new copy of data frame
+birth_reduced = clinical_df.copy()
 
 # Fill all NaN values with 0
-df1['age_at_diagnosis'] = df1['age_at_diagnosis'].fillna(0)
+pd.isna(birth_reduced['year_of_birth']).any(axis=1)
+birth_reduced['year_of_birth'] = birth_reduced['age_at_diagnosis'].fillna(0)
 
 # filling with 0 gives different answer!
-df1['days_to_death'].mean()
-clinical_df['days_to_death'].mean()
+birth_reduced['days_to_death'].mean()
+birth_reduced['days_to_death'].mean()
 
 # fill NaN with mean for all weight values
-df1['days_to_death'] = clinical_df['days_to_death'].fillna(clinical_df['days_to_death'].mean())
+birth_reduced['days_to_death'] = clinical_df['days_to_death'].fillna(clinical_df['days_to_death'].mean())
 
 # write data to csv
-clinical_df = pd.read_csv("data/clinical.csv")
+df_na.to_csv('data/clinical_complete.csv', index=False)
 
 # exclude any observation with missing data
 df_na = clinical_df.dropna()
@@ -136,7 +144,7 @@ df_na = clinical_df.dropna()
 #clinical_df['record_id'].dtype
 
 # Write DataFrame to CSV
-df_na.to_csv('data/clinical_complete.csv', index=False)
+
 
 #### Wrapping up ####
 
