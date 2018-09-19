@@ -17,82 +17,89 @@ import plotnine as p9
 import pandas as pd
 
 # Read in the survey CSV
-surveys_complete = pd.read_csv('data/surveys.csv')
-surveys_complete = surveys_complete.dropna()
+surveys_complete = pd.read_csv('data/birth_reduced.csv')
+smoke_complete = pd.read_csv('data/smoke_complete.csv')
 
-(p9.ggplot(data=surveys_complete))
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length')))
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length'))
+# create a simple ggplot
+# bind data to new plot
+# specify aesthetic: mapping data to plot
+# layers: ways (shapes) through which data are represented
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='age_at_diagnosis', y='cigarettes_per_day'))
     + p9.geom_point()
-)
-# Create
-surveys_plot = p9.ggplot(data=surveys_complete,
-                         mapping=p9.aes(x='weight', y='hindfoot_length'))
+    )
+# Create object to hold plot framework
+smoke_plot = p9.ggplot(data=smoke_complete,
+                         mapping=p9.aes(x='age_at_diagnosis', y='cigarettes_per_day'))
 
 # Draw the plot
-surveys_plot + p9.geom_point()
+smoke_plot + p9.geom_point()
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length'))
-    + p9.geom_point()
-)
+# building plots iteratively
+# add transparency
+smoke_plot + p9.geom_point(alpha=0.1)
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length'))
+# color points blue
+smoke_plot + p9.geom_point(alpha=0.1, color='blue')
+
+# color points by disease
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-)
+    )
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length'))
-    + p9.geom_point(alpha=0.1, color='blue')
-)
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight',
-                          y='hindfoot_length',
-                          color='species_id'))
+# add x axis label
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
+    + p9.xlab("age at diagnosis (days)")
 )
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length', color='species_id'))
+# change background theme
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-    + p9.xlab("Weight (g)")
+    + p9.xlab("age at diagnosis (days)")
+    + p9.theme_bw()
 )
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length', color='species_id'))
+# change font size
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-    + p9.xlab("Weight (g)")
-    + p9.scale_x_log10()
-)
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length', color='species_id'))
-    + p9.geom_point(alpha=0.1)
-    + p9.xlab("Weight (g)")
-    + p9.scale_x_log10()
+    + p9.xlab("age at diagnosis (days)")
     + p9.theme_bw()
     + p9.theme(text=p9.element_text(size=16))
 )
 
 # plotting distributions
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='species_id',
-                          y='weight'))
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='vital_status',
+                          y='cigarettes_per_day'))
     + p9.geom_boxplot()
 )
 
-# add individual points
+# change color
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='vital_status',
+                          y='cigarettes_per_day'))
+    + p9.geom_boxplot(color="tomato")
+)
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='species_id',
-                          y='weight'))
-    + p9.geom_jitter(alpha=0.2)
-    + p9.geom_boxplot(alpha=0.)
+# adding colored points to black box and whisker plot
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='vital_status',
+                          y='cigarettes_per_day'))
+    + p9.geom_boxplot()
+    + p9.geom_jitter(alpha=0.2, color="blue")
 )
 
 # plotting time series data
