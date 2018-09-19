@@ -92,12 +92,14 @@ pd.isnull(clinical_df)
 # select just the rows with NaN values
 clinical_df[pd.isnull(clinical_df).any(axis=1)]
 # count how many rows have missing data
-len(clinical_df[pd.isna(clinical_df).any(axis=1)])
+len(clinical_df[pd.isnull(clinical_df).any(axis=1)])
+len(clinical_df[pd.isna(clinical_df).any(axis=1)]) # an alias of isnull()
 
 # How could we extract all values WITHOUT missing data?
 clinical_df[-pd.isnull(clinical_df).any(axis=1)]
 clinical_df[pd.notna(clinical_df).any(axis=1)] # alternative way of selecting non-missing data
-len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
+clinical_df.dropna() # let another way
+len(clinical_df.dropna())
 # filtering for any missing data cuts out a lot of the dataset!
 
 # exclude missing data in only days to death
@@ -109,42 +111,56 @@ smoke_complete = clinical_df[-pd.isnull(clinical_df['cigarettes_per_day'])]
 smoke_complete = smoke_complete[smoke_complete.age_at_diagnosis > 0]
 # save filtered data to file
 smoke_complete.to_csv('data/smoke_complete.csv', index=False)
+# this is the first of two datasets we'll use next week!
 
 ## replace missing data in copied data frame
 
-birth_reduced
-year_of_birth
-vital_status (not reported)
-frequent diseases
-
-
 # create new copy of data frame
-birth_reduced = clinical_df.copy()
+birth_replace = clinical_df.copy()
 
-# Fill all NaN values with 0
-pd.isna(birth_reduced['year_of_birth']).any(axis=1)
-birth_reduced['year_of_birth'] = birth_reduced['age_at_diagnosis'].fillna(0)
+# look for missing data
+birth_replace[pd.isnull(birth_replace['year_of_birth'])]
+# fill missing values with 0
+birth_replace['year_of_birth'] = birth_replace['year_of_birth'].fillna(0)
 
 # filling with 0 gives different answer!
-birth_reduced['days_to_death'].mean()
-birth_reduced['days_to_death'].mean()
+birth_replace['year_of_birth'].mean()
+clinical_df['year_of_birth'].mean()
 
 # fill NaN with mean for all weight values
-birth_reduced['days_to_death'] = clinical_df['days_to_death'].fillna(clinical_df['days_to_death'].mean())
-
-# write data to csv
-df_na.to_csv('data/clinical_complete.csv', index=False)
-
-# exclude any observation with missing data
-df_na = clinical_df.dropna()
+birth_replace['year_of_birth'] = birth_replace['year_of_birth'].fillna(birth_replace['year_of_birth'].mean())
+# this won't do anything since we've already replaced all missing data!
 
 # can convert between data types, but is difficult without dealing with missing data
-# Convert the record_id field from an float to integer
-#clinical_df['age_at_diagnosis'] = clinical_df['age_at_diagnosis'].astype('int64')
-#clinical_df['record_id'].dtype
+# convert the age_at_diagnosis from an float to integer
+birth_reduced['year_of_birth'] = birth_reduced['year_of_birth'].astype('int64')
+birth_reduced['year_of_birth'].dtype
 
-# Write DataFrame to CSV
+## use masking to create second dataframe for next week
 
+# reference original data
+birth_reduced = clinical_df
+
+## Challenge: filter out missing data for year of birth and vital status
+birth_reduced = birth_reduced[-pd.isnull(birth_reduced['year_of_birth'])]
+birth_reduced = birth_reduced[-pd.isnull(birth_reduced['vital_status'])]
+
+# check to see that
+pd.unique(birth_reduced['vital_status'])
+## Challenge: remove 'not reported' from vital status
+birth_reduced = birth_reduced[birth_reduced.vital_status != 'not reported']
+pd.unique(birth_reduced['vital_status'])
+
+# count number of samples for each cancer type
+birth_reduced.groupby('disease').count()
+
+# create list of desired values
+dis_list = [LGG', 'UCEC', 'GBM', 'LUSC', 'BRCA']
+# extract values
+birth_reduced[birth_reduced['disease'].isin(dis_list)]
+
+# write data to csv
+birth_reduced.to_csv('data/birth_reduced.csv', index=False)
 
 #### Wrapping up ####
 
