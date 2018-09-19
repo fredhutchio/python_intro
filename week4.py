@@ -16,8 +16,8 @@
 import plotnine as p9
 import pandas as pd
 
-# Read in the survey CSV
-surveys_complete = pd.read_csv('data/birth_reduced.csv')
+# read in filtered datasets
+birth_reduced = pd.read_csv('data/birth_reduced.csv')
 smoke_complete = pd.read_csv('data/smoke_complete.csv')
 
 # create a simple ggplot
@@ -28,6 +28,12 @@ smoke_complete = pd.read_csv('data/smoke_complete.csv')
            mapping=p9.aes(x='age_at_diagnosis', y='cigarettes_per_day'))
     + p9.geom_point()
     )
+
+# ignore warnings (FutureWarning not fatal)
+import warnings
+warnings.simplefilter("ignore")
+# add new cell at top of notebook and re-execute plot to remove errors
+
 # Create object to hold plot framework
 smoke_plot = p9.ggplot(data=smoke_complete,
                          mapping=p9.aes(x='age_at_diagnosis', y='cigarettes_per_day'))
@@ -57,7 +63,7 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
         color = 'disease'))
     + p9.geom_point(alpha=0.1)
     + p9.xlab("age at diagnosis (days)")
-)
+    )
 
 # change background theme
 (p9.ggplot(data=smoke_complete,
@@ -67,7 +73,7 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
     + p9.geom_point(alpha=0.1)
     + p9.xlab("age at diagnosis (days)")
     + p9.theme_bw()
-)
+    )
 
 # change font size
 (p9.ggplot(data=smoke_complete,
@@ -78,21 +84,23 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
     + p9.xlab("age at diagnosis (days)")
     + p9.theme_bw()
     + p9.theme(text=p9.element_text(size=16))
-)
+    )
 
-# plotting distributions
+#### Plotting distributions ####
+
+# boxplot
 (p9.ggplot(data=smoke_complete,
            mapping=p9.aes(x='vital_status',
                           y='cigarettes_per_day'))
     + p9.geom_boxplot()
-)
+    )
 
 # change color
 (p9.ggplot(data=smoke_complete,
            mapping=p9.aes(x='vital_status',
                           y='cigarettes_per_day'))
     + p9.geom_boxplot(color="tomato")
-)
+    )
 
 # adding colored points to black box and whisker plot
 (p9.ggplot(data=smoke_complete,
@@ -100,37 +108,38 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
                           y='cigarettes_per_day'))
     + p9.geom_boxplot()
     + p9.geom_jitter(alpha=0.2, color="blue")
-)
+    )
 
-# plotting time series data
+#### Plotting time series data
 
-yearly_counts = surveys_complete.groupby(['year', 'species_id'])['species_id'].count()
+yearly_counts = birth_reduced.groupby(['year_of_birth', 'vital_status'])['vital_status'].count()
 yearly_counts
 
 yearly_counts = yearly_counts.reset_index(name='counts')
 yearly_counts
 
 (p9.ggplot(data=yearly_counts,
-           mapping=p9.aes(x='year',
+           mapping=p9.aes(x='year_of_birth',
                           y='counts'))
     + p9.geom_line()
-)
+    )
 
 (p9.ggplot(data=yearly_counts,
-           mapping=p9.aes(x='year',
+           mapping=p9.aes(x='year_of_birth',
+                          y='counts',
+                          color='vital_status'))
+    + p9.geom_line()
+    )
+
+#### Faceting ####
+
+# make separate time series plots for each cancer type
+(p9.ggplot(data=yearly_counts,
+           mapping=p9.aes(x='year_of_birth',
                           y='counts',
                           color='species_id'))
-    + p9.geom_line()
-)
-
-# faceting
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight',
-                          y='hindfoot_length',
-                          color='species_id'))
     + p9.geom_point(alpha=0.1)
-)
+    )
 
 # separate graphs for each sex
 
