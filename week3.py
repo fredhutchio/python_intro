@@ -18,7 +18,7 @@
 # Make sure pandas is loaded
 import pandas as pd
 
-# Read in the survey CSV
+# read in data
 clinical_df = pd.read_csv("data/clinical.csv") # import data as csv file
 # inspect output
 clinical_df.head()
@@ -35,6 +35,9 @@ clinical_df[clinical_df.year_of_birth != 1930]
 # sets of criteria
 clinical_df[(clinical_df.year_of_birth >= 1930) & (clinical_df.year_of_birth <= 1940)]
 
+## Challenge: print to the screen all data from clinical_df for patients with
+# stage 1a tumors who live more than or equal to 365 days
+
 # identify number of unique elements in a column
 pd.unique(clinical_df['disease'])
 
@@ -47,19 +50,21 @@ grouped_data.describe()
 # Count the number of each race
 clinical_df.groupby('race').count()
 
-# only display disease column in output
-clinical_df.groupby('race')['disease'].count()
+# extract only the race column from the previous output
+clinical_df.groupby('race')['race'].count()
+
+# count the number of each race for which days to death data is available
+clinical_df.groupby('race')['days_to_death'].count()
 
 # only display one race
-clinical_df.groupby('race')['disease'].count()['asian']
+clinical_df.groupby('race')['days_to_death'].count()['asian']
 
 # save output to object for later use
-race_counts = clinical_df.groupby('race')['disease'].count()
+race_counts = clinical_df.groupby('race')['days_to_death'].count()
 print(race_counts) # see script-friendly output
 
 ## Challenge: Write code that will display:
 # the number of patients in this dataset who are listed as alive
-# the number of patients with breast cancer (BRCA)
 
 #### Visualizing data with matplotlib ####
 
@@ -72,7 +77,7 @@ race_counts.plot(kind='bar');
 
 ## Challenge:
 # create a new object called total_count that counts the number of samples for each cancer type
-total_count = clinical_df.groupby('disease')['race'].count()
+total_count = clinical_df.groupby('disease')['disease'].count()
 # plot the number of samples for each cancer type
 total_count.plot(kind='bar');
 
