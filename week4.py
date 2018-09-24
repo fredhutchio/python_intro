@@ -112,18 +112,22 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
 
 #### Plotting time series data
 
+# group and count vital status by year of birth
 yearly_counts = birth_reduced.groupby(['year_of_birth', 'vital_status'])['vital_status'].count()
-yearly_counts
-
+yearly_counts # both year and vital status are row indexes
+# reset the index to use both as column variables
 yearly_counts = yearly_counts.reset_index(name='counts')
 yearly_counts
 
+# create line plot
 (p9.ggplot(data=yearly_counts,
            mapping=p9.aes(x='year_of_birth',
                           y='counts'))
     + p9.geom_line()
     )
+# suboptimal, because two data points for each year (alive and dead)
 
+# map vital status to color, which plots a line each for alive and dead
 (p9.ggplot(data=yearly_counts,
            mapping=p9.aes(x='year_of_birth',
                           y='counts',
@@ -133,80 +137,79 @@ yearly_counts
 
 #### Faceting ####
 
-# make separate time series plots for each cancer type
-(p9.ggplot(data=yearly_counts,
-           mapping=p9.aes(x='year_of_birth',
-                          y='counts',
-                          color='species_id'))
+# recall previous scatterplot
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
     )
 
-# separate graphs for each sex
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight',
-                          y='hindfoot_length',
-                          color='species_id'))
+# separate panels for each disease
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-    + p9.facet_wrap("sex")
-)
+    + p9.facet_wrap("disease")
+    )
 
-# separate graph for each plot ID
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight',
-                          y='hindfoot_length',
-                          color='species_id'))
+# separate graph for each tumor stage
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-    + p9.facet_wrap("plot_id")
-)
+    + p9.facet_wrap("tumor_stage")
+    )
 
-# arrange plots via a formula
-
-# only selecte the years of interest
-survey_2000 = surveys_complete[surveys_complete["year"].isin([2000, 2001])]
-
-(p9.ggplot(data=survey_2000,
-           mapping=p9.aes(x='weight',
-                          y='hindfoot_length',
-                          color='species_id'))
+# arrange plots via a formula: vital status in rows, disease in columns
+(p9.ggplot(data=smoke_complete,
+        mapping=p9.aes(x='age_at_diagnosis',
+        y='cigarettes_per_day',
+        color = 'disease'))
     + p9.geom_point(alpha=0.1)
-    + p9.facet_grid("year ~ sex")
-)
+    + p9.facet_grid("vital_status ~ disease")
+    )
 
-# bar plot
-
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='factor(year)'))
+# bar plot to show disease counts
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='factor(disease)'))
     + p9.geom_bar()
-)
+    )
 
-# add theme
+# change theme to black and white
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='factor(disease)'))
+    + p9.geom_bar()
+    + p9.theme_bw()
+    )
 
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='factor(year)'))
+
+# rotate x axis labels 90 degrees
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='factor(disease)'))
     + p9.geom_bar()
     + p9.theme_bw()
     + p9.theme(axis_text_x = p9.element_text(angle=90))
-)
+    )
 
 # create custom theme
-
-my_custom_theme = p9.theme(axis_text_x = p9.element_text(color="grey", size=10,
+my_custom_theme = p9.theme(axis_text_x = p9.element_text(color="blue", size=16,
                                                          angle=90, hjust=.5),
-                           axis_text_y = p9.element_text(color="grey", size=10))
-(p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='factor(year)'))
+                           axis_text_y = p9.element_text(color="blue", size=16))
+(p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='factor(disease)'))
     + p9.geom_bar()
     + my_custom_theme
-)
+    )
 
 # save plot
-
-my_plot = (p9.ggplot(data=surveys_complete,
-           mapping=p9.aes(x='weight', y='hindfoot_length'))
-    + p9.geom_point()
-)
+my_plot = (p9.ggplot(data=smoke_complete,
+           mapping=p9.aes(x='factor(disease)'))
+    + p9.geom_bar()
+    + my_custom_theme
+    )
 my_plot.save("scatterplot.png", width=10, height=10, dpi=300)
 
 #### Wrapping up ####
