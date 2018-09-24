@@ -86,6 +86,10 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
     + p9.theme(text=p9.element_text(size=16))
     )
 
+## Challenge: create a scatterplot from smoke_complete showing
+# age at diagnosis vs years smoked with points colored by gender
+# and appropriate axis labels
+
 #### Plotting distributions ####
 
 # boxplot
@@ -109,6 +113,8 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
     + p9.geom_boxplot()
     + p9.geom_jitter(alpha=0.2, color="blue")
     )
+
+## Challenge: visualize the same data as a violin plot in a color of your choice
 
 #### Plotting time series data
 
@@ -134,6 +140,9 @@ yearly_counts
                           color='vital_status'))
     + p9.geom_line()
     )
+
+## Challenge: create a plot of birth year and number of patients with
+# two lines representing the number of patients of each gender
 
 #### Faceting ####
 
@@ -171,6 +180,9 @@ yearly_counts
     + p9.geom_point(alpha=0.1)
     + p9.facet_grid("vital_status ~ disease")
     )
+
+## Challenge: alter your last challenge plot of (birth year by number of patients)
+# to show each gender in separate panels
 
 # bar plot to show disease counts
 (p9.ggplot(data=smoke_complete,
@@ -211,6 +223,12 @@ my_plot = (p9.ggplot(data=smoke_complete,
     + my_custom_theme
     )
 my_plot.save("scatterplot.png", width=10, height=10, dpi=300)
+
+## Challenge: find way to change tick marks (Google search!)
+
+## Challenge: improve one of the plots previously created today,
+# by changing thickness of lines, name of legend, or color palette
+# (http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
 
 #### Wrapping up ####
 
