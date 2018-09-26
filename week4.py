@@ -20,7 +20,7 @@ import pandas as pd
 birth_reduced = pd.read_csv('data/birth_reduced.csv')
 smoke_complete = pd.read_csv('data/smoke_complete.csv')
 
-# create a simple ggplot
+#### create a simple ggplot ####
 # bind data to new plot
 # specify aesthetic: mapping data to plot
 # layers: ways (shapes) through which data are represented
@@ -99,7 +99,7 @@ smoke_plot + p9.geom_point(alpha=0.1, color='blue')
     + p9.geom_boxplot()
     )
 
-# change color
+# change color of boxes
 (p9.ggplot(data=smoke_complete,
            mapping=p9.aes(x='vital_status',
                           y='cigarettes_per_day'))
@@ -222,7 +222,7 @@ my_plot = (p9.ggplot(data=smoke_complete,
     + p9.geom_bar()
     + my_custom_theme
     )
-my_plot.save("scatterplot.png", width=10, height=10, dpi=300)
+my_plot.save("figures/scatterplot.png", width=10, height=10, dpi=300)
 
 ## Challenge: find way to change tick marks (Google search!)
 
