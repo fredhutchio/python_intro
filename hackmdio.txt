@@ -1,0 +1,30 @@
+Introduction to Python
+====
+
+URL to this page: https://hackmd.io/s/B1JKEoawQ
+
+This page is for easy access to links we'll use during class. You don't need to do anything with this information until directed by your instructor. Links to the instructor's script will be added as the course progresses.
+
+If you have feedback about this course, please
+[comment here](https://goo.gl/forms/Bw8dTV0Wghq2iG5i2)
+
+Complete class notes [here](https://github.com/fredhutchio/python_intro)
+
+**Week 1: Intro to Python and Jupyter Notebooks**
+* Have you installed Anaconda and run the conda script to add plotnine? Instructions [here](http://www.fredhutch.io/software/)
+* [example notebook](https://github.com/rasilab/machkovech_2018/blob/master/scripts/NA43_competition.ipynb)
+* [Instructor's notebook](https://www.dropbox.com/s/730z1f49t5381z9/week1.ipynb?dl=0) (note: you will need to download this script and put in your project directory)
+
+**Week 2: Working with data**
+* [Zipped data file](https://www.dropbox.com/s/k639bkse64r0bfz/data.zip): download, unzip, add three files to data/ in project directory
+* [Pandas cheatsheet](https://github.com/pandas-dev/pandas/raw/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+* [python style guide](https://www.python.org/dev/peps/pep-0008/)
+* [Instructor's notebook](XXX) (note: you will need to download this script and put in your project directory)
+
+**Week 3: Extracting data from data frames**
+* [matplotlib documentation](https://matplotlib.org)
+* [Instructor's notebook](https://www.dropbox.com/s/19uomc54dz51izy/week3_Wed.ipynb?dl=0) (note: you will need to download this script and put in your project directory)
+
+**Week 4: Data visualization**
+* [plotnine documentation](https://plotnine.readthedocs.io/en/stable/index.html)
+* [Instructor's notebook](https://www.dropbox.com/s/3yw3efaf8jsgk2m/week4.ipynb?dl=0) (note: you will need to download this script and put in your project directory)
