@@ -11,7 +11,7 @@
 
 # instructor introduction
 # overview of fredhutch.io
-# sign in sheet
+# sign in 
 # learner introductions and motivation
 # overview course philosophy, how to stay engaged
 # course objectives: overview of basic functionality of python (syntax, data manipulation, visualization)
@@ -75,28 +75,23 @@
 #### Operators, functions, and data types ####
 
 # operators (mathematical calculations)
-4 + 5 # spaces are optional, but easier to read
-4+5
-6 * 7
-2 ** 16 # power
+4 + 5
+4+5 # spaces are optional, but easier to read
 3 > 4 # comparisons, logic
-True and True # statements of identity
-True or False
-True and False
 
 # built-in data types: strings, integers, floats
-text = "Fred Hutch"
 number = 42
 pi_value = 3.1415
+text = 'Fred Hutch'
 
 # find type of each using function (type)
-type(text) # string: characters (letters, numbers, punctuation, emoji)
 type(number) # integer
 type(pi_value) # float
+type(text) # string: characters (letters, numbers, punctuation, emoji)
 
 # convert float to integer
-int(pi_value)
-type(pi_value) # decimals removed
+int(pi_value) # decimals removed
+type(pi_value) # type hasn't changed!
 pi_value = int(pi_value) # convert original object
 type(pi_value)
 
@@ -105,7 +100,6 @@ float(number) # decimals added
 
 # see value of something (required to display output in a script)
 print(text)
-print(11)
 
 # demo example.py in separate window
 
@@ -117,10 +111,11 @@ help(print)
 #### Sequences ####
 
 # lists: data structure that holds sequence of elements
-# can be referenced by index (starts at 0)
 # surrounded by square brackets
 numbers = [1, 2, 3]
-numbers[0]
+
+# reference one part of a list
+numbers[0] # indexing starts at 0
 
 # find help on an object (can also check under help menu)
 ?numbers # can also use help(numbers), but may not be useful to you right now
@@ -131,29 +126,31 @@ print(numbers)
 # can use tab complete in notebook to see other options
 ?numbers.append # find help for attribute
 
+# lists can be string data as well
+organs = ['lung', 'breast', 'prostate']
+
 ## Challenge: what google search could you use to determine a method for adding multiple values to a list?
 ## Challenge: how do you remove items from a list?
-
-# for loop to access elements in list (or other data structure) one at a time
-for num in numbers:
-    print(num)
 
 # tuple: list with ordered sequence of elements; cannot be modified
 # surrounded by parentheses
 a_tuple = (1, 2, 3)
-another_tuple = ('blue', 'green', 'red')
-# reminder: lists use square brackets
-a_list = [1, 2, 3]
 
 ## Challenge:
 # What happens when you execute:
-#a_list[1] = 5
+#numbers[1] = 5
 #a_tuple[2] = 5
-# What does type(a_tuple) tell you about a_tuple?
 
 # Traceback is a multi-line error block printed
 # includes information on what error and where in code
 # comment out code error if you want to keep it for notes
+
+# sequences can include more than just one data type
+mix_tuple = ('lung', 200, 'chromosome 1') # can apply to lists, but they're more often one data type
+
+# for loop to access elements in list, tuple, or other data structure one at a time
+for num in mix_tuple:
+    print(num)
 
 #### Dictionaries ####
 
@@ -165,20 +162,20 @@ translation['one']
 list_value = {'yes': [1, 2, 3]}
 
 # cannot include lists as keys
-list_key = {[1, 2, 3]: 'nope'}
+#list_key = {[1, 2, 3]: 'nope'}
 
 # add items to dictionaries by assigning new value to key
 rev = {1: 'one', 2: 'two'} # different data types can be key, value
 rev[3] = 'three'
 rev
 
-# access each element one at a time with item
-for key, value in rev.items():
-    print(key, '->', value)
-
 # access each element by key
 for key in rev.keys():
     print(key, '->', rev[key])
+
+# access each element one at a time with item
+for key, value in rev.items():
+    print(key, '->', value)
 
 ## Challenge:
 # print only the values of the rev dictionary to the screen
@@ -203,3 +200,4 @@ print(z)
 # review how to get back into notebook
 # review objectives
 # preview next week's objectives
+# remind to sign in
