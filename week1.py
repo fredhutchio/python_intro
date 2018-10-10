@@ -94,15 +94,14 @@ type(text) # string: characters (letters, numbers, punctuation, emoji)
 type(number) # integer
 type(pi_value) # float
 
-# Convert a to an integer
-a = 7.83
-type(a)
-int(a) # decimals removed
+# convert float to integer
+int(pi_value)
+type(pi_value) # decimals removed
+pi_value = int(pi_value) # convert original object
+type(pi_value)
 
-# Convert b to a float
-b = 7
-type(b)
-float(b) # decimals added
+# convert integer to float
+float(number) # decimals added
 
 # see value of something (required to display output in a script)
 print(text)
