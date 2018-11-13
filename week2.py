@@ -63,9 +63,9 @@ clinical_df = pd.read_csv("data/clinical.csv")
 clinical_df.head() # print top few rows
 
 ## Challenge: What do you need to do to download and import the following files correctly:
-#clinical.tsv
+# example1: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.tsv
 pd.read_csv("../data/clinical.tsv", sep="\t")
-#clinical.txt
+# example2: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.txt
 pd.read_csv("../data/clinical.txt", sep=" ")
 
 # examine data import
