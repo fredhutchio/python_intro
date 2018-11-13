@@ -27,13 +27,22 @@
 # describe pandas
 #   python data analysis library
 
-# make pandas available to use in this notebook
+# make packages available to use in this notebook
+import os
+import urllib.request
 import pandas as pd
 
 #### Importing data ####
 
-# show where to download data
-# emphasize unzipping directory and moving data to appropriate location
+# create data directory
+os.mkdir("test")
+
+# download dataset
+urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.csv", "data/clinical.csv")
+
+# backup option:
+#   show where to download data
+#   emphasize unzipping directory and moving data to appropriate location
 
 # import data as csv
 pd.read_csv("data/clinical.csv")
@@ -53,7 +62,7 @@ clinical_df = pd.read_csv("data/clinical.csv")
 # preview data import
 clinical_df.head() # print top few rows
 
-## Challenge: What do you need to do to import the following files correctly:
+## Challenge: What do you need to do to download and import the following files correctly:
 #clinical.tsv
 pd.read_csv("../data/clinical.tsv", sep="\t")
 #clinical.txt
