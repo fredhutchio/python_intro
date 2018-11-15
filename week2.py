@@ -114,28 +114,6 @@ clinical_df[-1:] # what does this mean in the context of indexing?
 
 ## Challenge: how would you extract the last 10 rows of the dataset?
 
-#### Copying vs referencing objects ####
-
-# Using the "=" operator references the previous object
-ref_clinical_df = clinical_df
-
-# Using the "copy() method": actually creates another object
-true_copy_clinical_df = clinical_df.copy()
-
-# Assign the value `0` to the first three rows of data in the DataFrame
-ref_clinical_df[0:3] = 0
-# note: you probably wouldn't want to actually *do* this to your data!
-
-## Challenge: How and why are the following three objects different?
-# Hint: try applying head()
-clinical_df.head() # has been modified because ref_clinical_df referenced it
-ref_clinical_df.head() # was actually altered
-true_copy_clinical_df.head() # actual copy of original, unaltered
-# reinforce that the order of operations matters!
-
-# re-load fresh copy of object
-clinical_df = pd.read_csv("data/clinical.csv")
-
 #### Slicing subsets of rows and columns ####
 
 # iloc is integer indexing [row slicing, column slicing]
@@ -185,6 +163,25 @@ clinical_df["site_of_resection_or_biopsy"].describe()
 
 ## Challenge: How would you extract only the standard deviation for days to death?
 clinical_df["days_to_death"].std()
+
+#### Copying vs referencing objects ####
+
+# Using the "=" operator references the previous object
+ref_clinical_df = clinical_df
+
+# Using the "copy() method": actually creates another object
+true_copy_clinical_df = clinical_df.copy()
+
+# Assign the value `0` to the first three rows of data in the DataFrame
+ref_clinical_df[0:3] = 0
+# note: you probably wouldn't want to actually *do* this to your data!
+
+## Challenge: How and why are the following three objects different?
+# Hint: try applying head()
+clinical_df.head() # has been modified because ref_clinical_df referenced it
+ref_clinical_df.head() # was actually altered
+true_copy_clinical_df.head() # actual copy of original, unaltered
+# reinforce that the order of operations matters!
 
 #### Wrapping up ####
 
