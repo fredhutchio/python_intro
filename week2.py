@@ -27,13 +27,22 @@
 # describe pandas
 #   python data analysis library
 
-# make pandas available to use in this notebook
+# make packages available to use in this notebook
+import os
+import urllib.request
 import pandas as pd
 
 #### Importing data ####
 
-# show where to download data
-# emphasize unzipping directory and moving data to appropriate location
+# create data directory
+os.mkdir("test")
+
+# download dataset
+urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.csv", "data/clinical.csv")
+
+# backup option:
+#   show where to download data
+#   emphasize unzipping directory and moving data to appropriate location
 
 # import data as csv
 pd.read_csv("data/clinical.csv")
@@ -53,11 +62,11 @@ clinical_df = pd.read_csv("data/clinical.csv")
 # preview data import
 clinical_df.head() # print top few rows
 
-## Challenge: What do you need to do to import the following files correctly:
-#clinical.tsv
-pd.read_csv("../data/clinical.tsv", sep='\t')
-#clinical.txt
-pd.read_csv("../data/clinical.txt", sep=' ')
+## Challenge: What do you need to do to download and import the following files correctly:
+# example1: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.tsv
+pd.read_csv("../data/clinical.tsv", sep="\t")
+# example2: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.txt
+pd.read_csv("../data/clinical.txt", sep=" ")
 
 # examine data import
 type(clinical_df) # look at data type
@@ -72,23 +81,23 @@ clinical_df.dtypes # look at type of data in each column
 
 #### Selecting data using labels (columns) and row ranges ####
 
-# select a 'subset' of the data using the column name
-clinical_df['tumor_stage']
+# select a "subset" of the data using the column name
+clinical_df["tumor_stage"]
 # show only the first few rows of output
-clinical_df['tumor_stage'].head()
+clinical_df["tumor_stage"].head()
 # show data type for this row
-clinical_df['tumor_stage'].dtype # single column, O stands for "object"
+clinical_df["tumor_stage"].dtype # single column, O stands for "object"
 
-# use the column name as an 'attribute'; gives the same output
+# use the column name as an "attribute"; gives the same output
 clinical_df.tumor_stage
 # head still works here!
 clinical_df.tumor_stage.head()
 
 # What happens if you ask for a column that doesn't exist?
-#clinical_df['tumorstage']
+#clinical_df["tumorstage"]
 
 # Select two columns at once
-clinical_df[['tumor_stage', 'vital_status']]
+clinical_df[["tumor_stage", "vital_status"]]
 # double brackets are part of normal python syntax;
 # they reference parts of lists, which can represent more complex data structures
 
@@ -104,28 +113,6 @@ clinical_df[1:]
 clinical_df[-1:] # what does this mean in the context of indexing?
 
 ## Challenge: how would you extract the last 10 rows of the dataset?
-
-#### Copying vs referencing objects ####
-
-# Using the '=' operator references the previous object
-ref_clinical_df = clinical_df
-
-# Using the 'copy() method': actually creates another object
-true_copy_clinical_df = clinical_df.copy()
-
-# Assign the value `0` to the first three rows of data in the DataFrame
-ref_clinical_df[0:3] = 0
-# note: you probably wouldn't want to actually *do* this to your data!
-
-## Challenge: How and why are the following three objects different?
-# Hint: try applying head()
-clinical_df.head() # has been modified because ref_clinical_df referenced it
-ref_clinical_df.head() # was actually altered
-true_copy_clinical_df.head() # actual copy of original, unaltered
-# reinforce that the order of operations matters!
-
-# re-load fresh copy of object
-clinical_df = pd.read_csv("data/clinical.csv")
 
 #### Slicing subsets of rows and columns ####
 
@@ -149,33 +136,52 @@ clinical_df.loc[1: ]
 clinical_df.loc[[0, 10, 6831], ]
 
 # select first row for specified columns
-clinical_df.loc[0, ['primary_diagnosis', 'tumor_stage', 'age_at_diagnosis']]
+clinical_df.loc[0, ["primary_diagnosis", "tumor_stage", "age_at_diagnosis"]]
 
 ## Challenge: why doesn't the following code work?
 #clinical_df.loc[2, 6]
 
 ## Challenge: how would you extract the last 100 rows for only vital status and days to death?
-clinical_df.loc[6732:, ['vital_status', 'days_to_death']]
+clinical_df.loc[6732:, ["vital_status", "days_to_death"]]
 clinical_df.iloc[-100:, [3,5]]
 
 #### Calculating summary statistics ####
 
 # calculate basic stats for all records in single column
-clinical_df['age_at_diagnosis'].describe()
+clinical_df["age_at_diagnosis"].describe()
 
 # each metric one at a time (only prints last if all executed in one cell!)
-clinical_df['age_at_diagnosis'].min()
+clinical_df["age_at_diagnosis"].min()
 
 # convert columns
-clinical_df['age_at_diagnosis']/365
+clinical_df["age_at_diagnosis"]/365
 # convert min to days
-clinical_df['age_at_diagnosis'].min()/365
+clinical_df["age_at_diagnosis"].min()/365
 
 ## Challenge: What type of summary stats do you get for object data?
-clinical_df['site_of_resection_or_biopsy'].describe()
+clinical_df["site_of_resection_or_biopsy"].describe()
 
 ## Challenge: How would you extract only the standard deviation for days to death?
-clinical_df['days_to_death'].std()
+clinical_df["days_to_death"].std()
+
+#### Copying vs referencing objects ####
+
+# Using the "=" operator references the previous object
+ref_clinical_df = clinical_df
+
+# Using the "copy() method": actually creates another object
+true_copy_clinical_df = clinical_df.copy()
+
+# Assign the value `0` to the first three rows of data in the DataFrame
+ref_clinical_df[0:3] = 0
+# note: you probably wouldn't want to actually *do* this to your data!
+
+## Challenge: How and why are the following three objects different?
+# Hint: try applying head()
+clinical_df.head() # has been modified because ref_clinical_df referenced it
+ref_clinical_df.head() # was actually altered
+true_copy_clinical_df.head() # actual copy of original, unaltered
+# reinforce that the order of operations matters!
 
 #### Wrapping up ####
 

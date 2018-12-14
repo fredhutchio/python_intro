@@ -82,7 +82,7 @@
 # built-in data types: strings, integers, floats
 number = 42
 pi_value = 3.1415
-text = 'Fred Hutch'
+text = "Fred Hutch"
 
 # find type of each using function (type)
 type(number) # integer
@@ -127,7 +127,7 @@ print(numbers)
 ?numbers.append # find help for attribute
 
 # lists can be string data as well
-organs = ['lung', 'breast', 'prostate']
+organs = ["lung", "breast", "prostate"]
 
 ## Challenge: what google search could you use to determine a method for adding multiple values to a list?
 ## Challenge: how do you remove items from a list?
@@ -146,7 +146,7 @@ a_tuple = (1, 2, 3)
 # comment out code error if you want to keep it for notes
 
 # sequences can include more than just one data type
-mix_tuple = ('lung', 200, 'chromosome 1') # can apply to lists, but they're more often one data type
+mix_tuple = ("lung", 200, "chromosome 1") # can apply to lists, but they're more often one data type
 
 # for loop to access elements in list, tuple, or other data structure one at a time
 for num in mix_tuple:
@@ -155,27 +155,27 @@ for num in mix_tuple:
 #### Dictionaries ####
 
 # dictionary: container holding a pair of objects, key and value
-translation = {'one': 1, 'two': 2}
-translation['one']
+translation = {"one": 1, "two": 2}
+translation["one"]
 
 # can include lists as values
-list_value = {'yes': [1, 2, 3]}
+list_value = {"yes": [1, 2, 3]}
 
 # cannot include lists as keys
-#list_key = {[1, 2, 3]: 'nope'}
+#list_key = {[1, 2, 3]: "nope"}
 
 # add items to dictionaries by assigning new value to key
-rev = {1: 'one', 2: 'two'} # different data types can be key, value
-rev[3] = 'three'
+rev = {1: "one", 2: "two"} # different data types can be key, value
+rev[3] = "three"
 rev
 
 # access each element by key
 for key in rev.keys():
-    print(key, '->', rev[key])
+    print(key, "->", rev[key])
 
 # access each element one at a time with item
 for key, value in rev.items():
-    print(key, '->', value)
+    print(key, "->", value)
 
 ## Challenge:
 # print only the values of the rev dictionary to the screen
