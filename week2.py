@@ -35,7 +35,7 @@ import pandas as pd
 #### Importing data ####
 
 # create data directory
-os.mkdir("test")
+os.mkdir("data")
 
 # download dataset
 urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.csv", "data/clinical.csv")
