@@ -15,7 +15,7 @@
 
 # make sure folks are working in project directory with data/
 
-# Make sure pandas is loaded
+# load pandas library
 import pandas as pd
 
 # read in data
@@ -26,7 +26,7 @@ len(clinical_df)
 
 #### Conditional subsetting ####
 
-# conditional subsetting: extracting data based on criteria
+# motivation: extracting data based on criteria
 
 # what samples are from patients born in 1930?
 clinical_df.year_of_birth == 1930
@@ -49,34 +49,40 @@ clinical_df[(clinical_df.year_of_birth == 1930) | (clinical_df.year_of_birth == 
 
 #### Grouping ####
 
+# motivation: evaluting data available for a category (column)
+
+# what categories exist for race?
+# identify number of unique elements in a column
+pd.unique(clinical_df["race"])
+pd.unique(clinical_df.race) # same as above, specifying column differently
+
+# how can we summarize data by category?
 # group data by disease (object isn't interpretable by us)
 grouped_data = clinical_df.groupby("race")
+# note: we can't specify race as an attribute here because of the syntax of the method groupby
 
 # summary stats for all columns by disease
 grouped_data.describe()
+# for only one column
+grouped_data.race.describe()
 
-# extract summary data from one of the columns for race
-grouped_data.age_at_diagnosis.describe()
-
-# identify number of unique elements in a column
-pd.unique(clinical_df["race"])
-
-# Count the number of each race
+# count the number of each race (only one summary stat from above)
 grouped_data.count()
-
-# extract only the race column from the previous output
-grouped_data["race"].count()
+# for only one column
+grouped_data.race.count()
 
 # count the number of each race for which days to death data is available
-grouped_data["days_to_death"].count()
+grouped_data.days_to_death.count()
+# how does this differ from the last command?
 
 # only display one race
-grouped_data["days_to_death"].count()["asian"]
+grouped_data.days_to_death.count().asian
 # remember this is synonymous with:
 clinical_df.groupby("race")["days_to_death"].count()["asian"]
+# this second command differs because of the data object (clinical_df) and the syntax for identifying columns
 
 # save output to object for later use
-race_counts = grouped_data["days_to_death"].count()
+race_counts = grouped_data.days_to_death.count()
 print(race_counts) # see script-friendly output
 
 ## Challenge: Write code that will display:
@@ -106,22 +112,22 @@ total_count.plot(kind="bar");
 birth_replace = clinical_df.copy()
 
 # look for missing data
-birth_replace[pd.isnull(birth_replace["year_of_birth"])]
+birth_replace[pd.isnull(birth_replace.year_of_birth)]
 # fill missing values with 0
-birth_replace["year_of_birth"] = birth_replace["year_of_birth"].fillna(0)
+birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(0)
 
 # filling with 0 gives different answer!
-birth_replace["year_of_birth"].mean()
-clinical_df["year_of_birth"].mean()
+birth_replace.year_of_birth.mean()
+clinical_df.year_of_birth.mean()
 
 # fill NaN with mean for all weight values
-birth_replace["year_of_birth"] = birth_replace["year_of_birth"].fillna(birth_replace["year_of_birth"].mean())
+birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(birth_replace.year_of_birth.mean())
 # this won't do anything since we've already replaced all missing data!
 
 # can convert between data types, but is difficult without dealing with missing data
 # convert the age_at_diagnosis from an float to integer
-birth_replace["year_of_birth"] = birth_replace["year_of_birth"].astype("int64")
-birth_replace["year_of_birth"].dtype
+birth_replace.year_of_birth = birth_replace.year_of_birth.astype("int64")
+birth_replace.year_of_birth.dtype
 #clinical_df["year_of_birth"].dtype # gives error
 
 #### Missing data: masking ####
@@ -142,7 +148,7 @@ len(clinical_df.dropna())
 # filtering for any missing data cuts out a lot of the dataset!
 
 # exclude missing data in only days to death
-clinical_df[-pd.isnull(clinical_df["cigarettes_per_day"])]
+clinical_df[-pd.isnull(clinical_df.cigarettes_per_day)]
 clinical_df.dropna(subset = ["cigarettes_per_day"])
 
 # save masked results to new object
@@ -161,14 +167,14 @@ birth_reduced = clinical_df
 ## Challenge: filter out missing data for year of birth and vital status
 birth_reduced = birth_reduced.dropna(subset = ["year_of_birth", "vital_status"])
 
-birth_reduced = birth_reduced[-pd.isnull(birth_reduced["year_of_birth"])]
-birth_reduced = birth_reduced[-pd.isnull(birth_reduced["vital_status"])]
+birth_reduced = birth_reduced[-pd.isnull(birth_reduced.year_of_birth)]
+birth_reduced = birth_reduced[-pd.isnull(birth_reduced.vital_status)]
 
 # check to see that it worked
-pd.unique(birth_reduced["vital_status"])
+pd.unique(birth_reduced.vital_status)
 ## Challenge: remove "not reported" from vital status
 birth_reduced = birth_reduced[birth_reduced.vital_status != "not reported"]
-pd.unique(birth_reduced["vital_status"])
+pd.unique(birth_reduced.vital_status)
 
 # count number of samples for each cancer type
 birth_reduced.groupby("disease").count()
