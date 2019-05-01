@@ -90,8 +90,9 @@ print(race_counts) # see script-friendly output
 
 #### Visualizing data with matplotlib ####
 
-# Make sure figures appear inline in notebook
+# Make sure figures appear inline in some interfaces
 %matplotlib inline
+# can also use plt.show()
 
 # Create a quick bar chart of number of patients with race known
 race_counts.plot(kind="bar");
