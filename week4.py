@@ -5,10 +5,10 @@
 #### Objectives ####
 
 # Today:
-# import dataset
-# operators, functions, and data types
-# sequences and dictionaries
-# defining functions
+#   creating and modifying scatterplots and boxplots
+#   representing time series data as line plots
+#   splitting into multiple panels
+#   customizing plots
 
 #### Getting set up ####
 
@@ -116,7 +116,7 @@ smoke_plot + p9.geom_point(alpha=0.1, color="blue")
 
 ## Challenge: visualize the same data as a violin plot in a color of your choice
 
-#### Plotting time series data
+#### Plotting time series data ####
 
 # group and count vital status by year of birth
 yearly_counts = birth_reduced.groupby(["year_of_birth", "vital_status"])["vital_status"].count()
