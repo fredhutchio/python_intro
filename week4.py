@@ -34,9 +34,9 @@ import warnings
 warnings.simplefilter("ignore")
 # add new cell at top of notebook and re-execute plot to remove errors
 
-# Create object to hold plot framework
-smoke_plot = p9.ggplot(data=smoke_complete,
-                         mapping=p9.aes(x="age_at_diagnosis", y="cigarettes_per_day"))
+# Create object to hold plot framework, and remove argument tags
+smoke_plot = p9.ggplot(smoke_complete,
+                         p9.aes(x="age_at_diagnosis", y="cigarettes_per_day"))
 
 # Draw the plot
 smoke_plot + p9.geom_point()
@@ -49,16 +49,16 @@ smoke_plot + p9.geom_point(alpha=0.1)
 smoke_plot + p9.geom_point(alpha=0.1, color="blue")
 
 # color points by disease
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
     )
 
 # add x axis label
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -66,8 +66,8 @@ smoke_plot + p9.geom_point(alpha=0.1, color="blue")
     )
 
 # change background theme
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -76,8 +76,8 @@ smoke_plot + p9.geom_point(alpha=0.1, color="blue")
     )
 
 # change font size
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -93,22 +93,21 @@ smoke_plot + p9.geom_point(alpha=0.1, color="blue")
 #### Plotting distributions ####
 
 # boxplot
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="vital_status",
+(p9.ggplot(smoke_complete,
+           p9.aes(x="vital_status",
                           y="cigarettes_per_day"))
     + p9.geom_boxplot()
     )
 
-# change color of boxes
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="vital_status",
-                          y="cigarettes_per_day"))
-    + p9.geom_boxplot(color="tomato")
+# change color of boxes and move aes to geom layer
+(p9.ggplot(smoke_complete)
+    + p9.geom_boxplot(p9.aes(x="vital_status",
+                   y="cigarettes_per_day"), color="tomato")
     )
 
 # adding colored points to black box and whisker plot
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="vital_status",
+(p9.ggplot(smoke_complete,
+           p9.aes(x="vital_status",
                           y="cigarettes_per_day"))
     + p9.geom_boxplot()
     + p9.geom_jitter(alpha=0.2, color="blue")
@@ -126,16 +125,16 @@ yearly_counts = yearly_counts.reset_index(name="counts")
 yearly_counts
 
 # create line plot
-(p9.ggplot(data=yearly_counts,
-           mapping=p9.aes(x="year_of_birth",
+(p9.ggplot(yearly_counts,
+           p9.aes(x="year_of_birth",
                           y="counts"))
     + p9.geom_line()
     )
 # suboptimal, because two data points for each year (alive and dead)
 
 # map vital status to color, which plots a line each for alive and dead
-(p9.ggplot(data=yearly_counts,
-           mapping=p9.aes(x="year_of_birth",
+(p9.ggplot(yearly_counts,
+           p9.aes(x="year_of_birth",
                           y="counts",
                           color="vital_status"))
     + p9.geom_line()
@@ -147,16 +146,16 @@ yearly_counts
 #### Faceting ####
 
 # recall previous scatterplot
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
     )
 
 # separate panels for each disease
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -164,8 +163,8 @@ yearly_counts
     )
 
 # separate graph for each tumor stage
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -173,8 +172,8 @@ yearly_counts
     )
 
 # arrange plots via a formula: vital status in rows, disease in columns
-(p9.ggplot(data=smoke_complete,
-        mapping=p9.aes(x="age_at_diagnosis",
+(p9.ggplot(smoke_complete,
+        p9.aes(x="age_at_diagnosis",
         y="cigarettes_per_day",
         color = "disease"))
     + p9.geom_point(alpha=0.1)
@@ -185,22 +184,22 @@ yearly_counts
 # to show each gender in separate panels
 
 # bar plot to show disease counts
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="factor(disease)"))
+(p9.ggplot(smoke_complete,
+           p9.aes(x="factor(disease)"))
     + p9.geom_bar()
     )
 
 # change theme to black and white
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="factor(disease)"))
+(p9.ggplot(smoke_complete,
+           p9.aes(x="factor(disease)"))
     + p9.geom_bar()
     + p9.theme_bw()
     )
 
 
 # rotate x axis labels 90 degrees
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="factor(disease)"))
+(p9.ggplot(smoke_complete,
+           p9.aes(x="factor(disease)"))
     + p9.geom_bar()
     + p9.theme_bw()
     + p9.theme(axis_text_x = p9.element_text(angle=90))
@@ -210,15 +209,15 @@ yearly_counts
 my_custom_theme = p9.theme(axis_text_x = p9.element_text(color="blue", size=16,
                                                          angle=90, hjust=.5),
                            axis_text_y = p9.element_text(color="blue", size=16))
-(p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="factor(disease)"))
+(p9.ggplot(smoke_complete,
+           p9.aes(x="factor(disease)"))
     + p9.geom_bar()
     + my_custom_theme
     )
 
 # save plot
-my_plot = (p9.ggplot(data=smoke_complete,
-           mapping=p9.aes(x="factor(disease)"))
+my_plot = (p9.ggplot(smoke_complete,
+           p9.aes(x="factor(disease)"))
     + p9.geom_bar()
     + my_custom_theme
     )
