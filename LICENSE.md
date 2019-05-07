@@ -1,3 +1,10 @@
+# LICENSE
+
+This repository is adapted from content originally appearing in 
+[Python for data analysis and visualization of Ecological Data](https://datacarpentry.org/python-ecology-lesson/),
+Copyright (c) Data Carpentry. The main distinction from the original materials 
+is the use of a different dataset. The full text of their licensing agreement is below.
+
 ## Instructional Material
 
 All Software Carpentry, Data Carpentry, and Library Carpentry instructional material is
