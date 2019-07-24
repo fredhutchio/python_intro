@@ -5,13 +5,13 @@
 #### Before class ####
 
 # share URL to hack.md
-# check installation of python and jupyter notebooks
+# check learners have installed Anaconda
 
 #### Welcome ####
 
 # instructor introduction
 # overview of fredhutch.io
-# sign in 
+# sign in
 # learner introductions and motivation
 # overview course philosophy, how to stay engaged
 # course objectives: overview of basic functionality of python (syntax, data manipulation, visualization)
@@ -44,18 +44,13 @@
 #   jupyter notebook: installed with Anaconda
 
 # setting up a project directory
-# create new directory called python_project
-# keep data, analyses, and text in single folder (directory)
-# scripts and text files in folder relate to relative places in the directory
-# suggested directories to go with project:
-#   data/ which may include separate directories for raw and processed data
-#   documents/ for outlines, drafts, and other text
-#   scripts/ for scripts related to data cleaning, analysis, plotting
+# create new directory/folder called python_project
+# a project contains all the work for a manuscript, chapter of a thesis, monthly report, etc
+# keep data, analyses, and text in single folder
 
 # setting up Notebooks
-#   open Terminal (Mac) or Command Prompt (Windows)
-#   execute `jupyter notebook`
-#   terminal window must stay open, this is kernel (running python)
+#   open Anaconda Navigator, then Jupyter notebook
+#   on Mac: terminal window must stay open, this is kernel (running python)
 #   web browser is how you interact with notebook
 #   navigate to project directory
 #   click "New" in upper right hand, then select "Python3"
