@@ -8,7 +8,7 @@
 # Today:
 #   conditional subsetting
 #   grouping data
-#   visualizing data with matplotlib
+#   visualizing data with pandas
 #   dealing with missing data
 
 #### Getting set up ####
@@ -30,6 +30,7 @@ len(clinical_df)
 
 # what samples are from patients born in 1930?
 clinical_df.year_of_birth == 1930
+# double equal signs to differentiate from variable assignment and parameter specification
 # this gives true/false results
 
 # conditional subsetting: all patients born in 1930
@@ -37,6 +38,7 @@ clinical_df[clinical_df.year_of_birth == 1930]
 
 # all patients NOT born in 1930
 clinical_df[clinical_df.year_of_birth != 1930]
+# inverting the true/false results
 
 # combining criteria: AND
 clinical_df[(clinical_df.year_of_birth >= 1930) & (clinical_df.year_of_birth <= 1940)]
@@ -57,16 +59,16 @@ pd.unique(clinical_df["race"])
 pd.unique(clinical_df.race) # same as above, specifying column differently
 
 # how can we summarize data by category?
-# group data by disease (object isn't interpretable by us)
+# group data by race (object isn't interpretable by us)
 grouped_data = clinical_df.groupby("race")
 # note: we can't specify race as an attribute here because of the syntax of the method groupby
 
-# summary stats for all columns by disease
+# summary stats for all columns by race
 grouped_data.describe()
-# for only one column
+# summary stats for only one column
 grouped_data.race.describe()
 
-# count the number of each race (only one summary stat from above)
+# show the number of patients for each race available for all columns(only one summary stat from above)
 grouped_data.count()
 # for only one column
 grouped_data.race.count()
@@ -88,7 +90,7 @@ print(race_counts) # see script-friendly output
 ## Challenge: Write code that will display:
 # the number of patients in this dataset who are listed as alive
 
-#### Visualizing data with matplotlib ####
+#### Visualizing data with pandas ####
 
 # Make sure figures appear inline in some interfaces
 %matplotlib inline
@@ -112,7 +114,7 @@ total_count.plot(kind="bar");
 # create new copy of data frame
 birth_replace = clinical_df.copy()
 
-# look for missing data
+# look for missing data in a single column
 birth_replace[pd.isnull(birth_replace.year_of_birth)]
 # fill missing values with 0
 birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(0)
@@ -129,7 +131,7 @@ birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(birth_replace.y
 # convert the age_at_diagnosis from an float to integer
 birth_replace.year_of_birth = birth_replace.year_of_birth.astype("int64")
 birth_replace.year_of_birth.dtype
-#clinical_df["year_of_birth"].dtype # gives error
+#clinical_df.year_of_birth.astype("int64") # gives error
 
 #### Missing data: masking ####
 
@@ -141,18 +143,18 @@ pd.isnull(clinical_df)
 # other options include pd.isna (alias of pd.isnull) and pd.notna (removes missing data)
 
 # extract all rows values WITHOUT missing data
-clinical_df[-pd.isnull(clinical_df).any(axis=1)]
-len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
-# another way to extract rows WITHOUT missing data
 clinical_df.dropna() # yet another way
 len(clinical_df.dropna())
 # filtering for any missing data cuts out a lot of the dataset!
 
+# optional: can also do this with .isnull
+clinical_df[-pd.isnull(clinical_df).any(axis=1)]
+len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
+
 # exclude missing data in only days to death
-clinical_df[-pd.isnull(clinical_df.cigarettes_per_day)]
 clinical_df.dropna(subset = ["cigarettes_per_day"])
 
-# save masked results to new object
+# assign masked results to new name (masking doesn't interfere with original data)
 smoke_complete = clinical_df.dropna(subset = ["cigarettes_per_day"])
 # apply additional filter for age at diagnosis
 smoke_complete = smoke_complete[smoke_complete.age_at_diagnosis > 0]
@@ -167,7 +169,7 @@ birth_reduced = clinical_df
 
 ## Challenge: filter out missing data for year of birth and vital status
 birth_reduced = birth_reduced.dropna(subset = ["year_of_birth", "vital_status"])
-
+# another option:
 birth_reduced = birth_reduced[-pd.isnull(birth_reduced.year_of_birth)]
 birth_reduced = birth_reduced[-pd.isnull(birth_reduced.vital_status)]
 
@@ -177,13 +179,15 @@ pd.unique(birth_reduced.vital_status)
 birth_reduced = birth_reduced[birth_reduced.vital_status != "not reported"]
 pd.unique(birth_reduced.vital_status)
 
-# count number of samples for each cancer type
-birth_reduced.groupby("disease").count()
-
-# create list of desired values
-dis_list = ["LGG", "UCEC", "GBM", "LUSC", "BRCA"]
+## count number of samples for each cancer type
+# group by disease and count
+dis_counts = birth_reduced.groupby("disease").disease.count()
+# reset index to default (because of groupby)
+dis_counts = dis_counts.reset_index(name="counts")
+# keep only diseases with many observations
+dis_counts = dis_counts[dis_counts.counts > 500]
 # extract values
-birth_reduced = birth_reduced[birth_reduced["disease"].isin(dis_list)]
+birth_reduced = birth_reduced[birth_reduced["disease"].isin(dis_counts.disease)]
 
 # write data to csv
 birth_reduced.to_csv("data/birth_reduced.csv", index=False)
