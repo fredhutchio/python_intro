@@ -19,42 +19,41 @@
 #### Using packages ####
 
 # make sure everyone is working in project directory
-# create new notebook for this week's material
+# create new notebook for this week's material (name week2)
 
-# defining packages
+# introduction to packages
 #   collection of functions
-#   community contributed
+#   community contributed (anyone can write a package!)
 # describe pandas
 #   python data analysis library
 
 # make packages available to use in this notebook
 import os
 import urllib.request
-import pandas as pd
+import pandas as pd # pd is alias, or shortcut, to specify we're using a function from it
 
 #### Importing data ####
 
 # create data directory
 os.mkdir("data")
 
-# download dataset
+# download dataset (url on HackMD page)
 urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.csv", "data/clinical.csv")
+# can preview data file by opening in web browser, or opening CSV file in spreadsheet program
+# overview of tidy data principles
+#   columns: variables (demographic and health information)
+#   rows: observations (patients)
+#   one piece of info per cell
+# csv: comma separated values (other things besides commas can have separators too though)
+# data from The Cancer Genome Atlas (from NIH), several cancer types in one file
 
-# backup option:
+# backup option for downloading data, if above code doesn't work:
 #   show where to download data
 #   emphasize unzipping directory and moving data to appropriate location
 
 # import data as csv
 pd.read_csv("data/clinical.csv")
 # this only prints it to the screen!
-
-# appropriate composition of data into tables still isn't commonly taught!
-# overview of tidy data principles
-#   columns: variables
-#   rows: observations
-#   one piece of info per cell
-# csv: comma separated values (other things besides commas can have separators too though)
-# describe data and where it came from
 
 # assign data to object
 clinical_df = pd.read_csv("data/clinical.csv")
@@ -73,6 +72,7 @@ type(clinical_df) # look at data type
 clinical_df.columns # view column names
 clinical_df.dtypes # look at type of data in each column
 
+# can enter following as markdown cell (* render as bullet points)
 ## Data types: pandas vs native python
 # * object = string
 # * int64 = integer (64 bit)
@@ -98,6 +98,7 @@ clinical_df.tumor_stage.head()
 
 # Select two columns at once
 clinical_df[["tumor_stage", "vital_status"]]
+# can't use .column_name because there are multiple columns!
 # double brackets are part of normal python syntax;
 # they reference parts of lists, which can represent more complex data structures
 
@@ -148,21 +149,21 @@ clinical_df.iloc[-100:, [3,5]]
 #### Calculating summary statistics ####
 
 # calculate basic stats for all records in single column
-clinical_df["age_at_diagnosis"].describe()
+clinical_df.age_at_diagnosis.describe()
 
 # each metric one at a time (only prints last if all executed in one cell!)
-clinical_df["age_at_diagnosis"].min()
+clinical_df.age_at_diagnosis.min()
 
 # convert columns
-clinical_df["age_at_diagnosis"]/365
+clinical_df.age_at_diagnosis/365
 # convert min to days
-clinical_df["age_at_diagnosis"].min()/365
+clinical_df.age_at_diagnosis.min()/365
 
 ## Challenge: What type of summary stats do you get for object data?
-clinical_df["site_of_resection_or_biopsy"].describe()
+clinical_df.site_of_resection_or_biopsy.describe()
 
 ## Challenge: How would you extract only the standard deviation for days to death?
-clinical_df["days_to_death"].std()
+clinical_df.days_to_death.std()
 
 #### Copying vs referencing objects ####
 

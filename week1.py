@@ -11,10 +11,15 @@
 
 # instructor introduction
 # overview of fredhutch.io
-# sign in
+# sign in using link on HackMD page
 # learner introductions and motivation
-# overview course philosophy, how to stay engaged
-# course objectives: overview of basic functionality of python (syntax, data manipulation, visualization)
+# overview course philosophy:
+#   designed for
+# course objectives:
+#   intro to python syntax (use of words/symbols to represent things)
+#   importing and manipulating data
+#   creating publication-quality data visualizations
+#   by the end of this course, you should be able to work on processing your own spreadsheet-style data
 
 #### Objectives ####
 
@@ -42,30 +47,34 @@
 #       includes extra packages like ipython, spyder
 #   conda: package manager that comes with Anaconda, installs/updates packages
 #   jupyter notebook: installed with Anaconda
+#   example notebook (link on hackmd):
+#       https://github.com/rasilab/machkovech_2018/blob/master/scripts/NA43_competition.ipynb
 
-# setting up a project directory
-# create new directory/folder called python_project
-# a project contains all the work for a manuscript, chapter of a thesis, monthly report, etc
-# keep data, analyses, and text in single folder
-
-# setting up Notebooks
+# Intro to Jupyter
 #   open Anaconda Navigator, then Jupyter notebook
 #   on Mac: terminal window must stay open, this is kernel (running python)
 #   web browser is how you interact with notebook
-#   navigate to project directory
+#   this is not actually interacting with the internet; note "localhost" in URL
+# setting up a project directory
+#   navigate to location where you'd like to save files for this class
+#   click "New" in upper right hand corner, then "Folder"
+#   name new directory/folder "intro_python": this is your project directory
+#   a project contains all the work for a manuscript, chapter of a thesis, monthly report, etc
+#   keep data, analyses, and text in single folder
+#   click on folder; should be empty
 #   click "New" in upper right hand, then select "Python3"
 #   creates notebook (*.ipynb, or ipython notebook file)
 #   autosaves, or can save manually
-#   click on title to rename
-# executing code in a jupyter notebook:
+#   click on title to rename; name this notebook "week1"
+# executing code in a jupyter notebook (demo on basic math below)
 #   enter code in cell and execute by pressing Shift + Return/enter
 #   output is printed directly below cell, prefaced by Out[ ]:
 #   add new cell with + button
 #   can add Markdown cells with nicely formatted text
-#   comments prefaced with # (not read/executed by python)
+#   add title in Markdown cell as # Intro to Python
+#   in code cells, comments prefaced with # (not read/executed by python)
 #   commands and output saved in notebook
 #   talk about other menu options and buttons to remove/add/run cells
-#   example notebook: https://github.com/rasilab/machkovech_2018/blob/master/scripts/NA43_competition.ipynb
 
 #### Operators, functions, and data types ####
 
@@ -95,8 +104,6 @@ float(number) # decimals added
 
 # see value of something (required to display output in a script)
 print(text)
-
-# demo example.py in separate window
 
 # print and type are built in functions; there can also be methods (subset of functions) and user-defined functions
 
@@ -152,6 +159,7 @@ for num in mix_tuple:
 # dictionary: container holding a pair of objects, key and value
 translation = {"one": 1, "two": 2}
 translation["one"]
+# example use of dictionary in biology: base pair matching when reverse-complementing DNA
 
 # can include lists as values
 list_value = {"yes": [1, 2, 3]}
@@ -164,11 +172,12 @@ rev = {1: "one", 2: "two"} # different data types can be key, value
 rev[3] = "three"
 rev
 
-# access each element by key
+# two different approaches for printing key/value pairs in a dictionary
+# access each element using rev.keys
 for key in rev.keys():
     print(key, "->", rev[key])
 
-# access each element one at a time with item
+# access each element using rev.items
 for key, value in rev.items():
     print(key, "->", value)
 
@@ -194,5 +203,6 @@ print(z)
 # make sure work is saved
 # review how to get back into notebook
 # review objectives
+# we won't be writing any more loops or functions in this course, but they are useful for understanding how python works!
 # preview next week's objectives
 # remind to sign in

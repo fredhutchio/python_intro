@@ -51,7 +51,7 @@ clinical_df[(clinical_df.year_of_birth == 1930) | (clinical_df.year_of_birth == 
 
 #### Grouping ####
 
-# motivation: evaluting data available for a category (column)
+# motivation: evaluting data available for a variable (column of categorical data)
 
 # what categories exist for race?
 # identify number of unique elements in a column
@@ -65,10 +65,12 @@ grouped_data = clinical_df.groupby("race")
 
 # summary stats for all columns by race
 grouped_data.describe()
-# summary stats for only one column
+# only summarizes for quantitative variables, gives summary stats for each column grouped by race
+
+# summary stats for race for only one column (race)
 grouped_data.race.describe()
 
-# show the number of patients for each race available for all columns(only one summary stat from above)
+# show the number of patients for each race available for all columns (only one summary stat from above)
 grouped_data.count()
 # for only one column
 grouped_data.race.count()
@@ -77,7 +79,7 @@ grouped_data.race.count()
 grouped_data.days_to_death.count()
 # how does this differ from the last command?
 
-# only display one race
+# only display one race (asian), from days_to_death grouped by race
 grouped_data.days_to_death.count().asian
 # remember this is synonymous with:
 clinical_df.groupby("race")["days_to_death"].count()["asian"]
@@ -116,10 +118,10 @@ birth_replace = clinical_df.copy()
 
 # look for missing data in a single column
 birth_replace[pd.isnull(birth_replace.year_of_birth)]
-# fill missing values with 0
+# fill missing values with 0 (this makes an obvious change we'll be able to track visually)
 birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(0)
 
-# filling with 0 gives different answer!
+# filling with 0 gives different answer for mean! not a good approach for work where summary stats matter later in the analysis
 birth_replace.year_of_birth.mean()
 clinical_df.year_of_birth.mean()
 
@@ -127,28 +129,23 @@ clinical_df.year_of_birth.mean()
 birth_replace.year_of_birth = birth_replace.year_of_birth.fillna(birth_replace.year_of_birth.mean())
 # this won't do anything since we've already replaced all missing data!
 
-# can convert between data types, but is difficult without dealing with missing data
+# Optional: can convert between data types, but is difficult without dealing with missing data
 # convert the age_at_diagnosis from an float to integer
 birth_replace.year_of_birth = birth_replace.year_of_birth.astype("int64")
 birth_replace.year_of_birth.dtype
-#clinical_df.year_of_birth.astype("int64") # gives error
+#clinical_df.year_of_birth.astype("int64") # gives error because of missing data
 
 #### Missing data: masking ####
 
 # mask: excluding missing values
 
-# check for missing data anywhere in dataset
-pd.isnull(clinical_df)
-# gives true/false matrix
-# other options include pd.isna (alias of pd.isnull) and pd.notna (removes missing data)
-
 # extract all rows values WITHOUT missing data
-clinical_df.dropna() # yet another way
+clinical_df.dropna()
 len(clinical_df.dropna())
 # filtering for any missing data cuts out a lot of the dataset!
 
 # optional: can also do this with .isnull
-clinical_df[-pd.isnull(clinical_df).any(axis=1)]
+clinical_df[-pd.isnull(clinical_df).any(axis=1)] # axis specifies if missing data is removed by rows or columns
 len(clinical_df[-pd.isnull(clinical_df).any(axis=1)])
 
 # exclude missing data in only days to death
@@ -159,7 +156,7 @@ smoke_complete = clinical_df.dropna(subset = ["cigarettes_per_day"])
 # apply additional filter for age at diagnosis
 smoke_complete = smoke_complete[smoke_complete.age_at_diagnosis > 0]
 # save filtered data to file
-smoke_complete.to_csv("data/smoke_complete.csv", index=False)
+smoke_complete.to_csv("data/smoke_complete.csv", index=False) # index=False stops index value from being printed before first column
 # this is the first of two datasets we'll use next week!
 
 ## use masking to create second dataframe for next week
