@@ -102,6 +102,8 @@ print(race_counts) # see script-friendly output
 race_counts.plot(kind="bar");
 # the semicolon suppresses the output, allowing the plot to show
 
+## BREAK
+
 ## Challenge:
 # create a new object called total_count that counts the number of samples for each cancer type (disease)
 total_count = clinical_df.groupby("disease")["disease"].count()

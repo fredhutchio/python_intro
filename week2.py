@@ -113,6 +113,8 @@ clinical_df[1:]
 # Select the last element in the list
 clinical_df[-1:] # what does this mean in the context of indexing?
 
+## BREAK
+
 ## Challenge: how would you extract the last 10 rows of the dataset?
 
 #### Slicing subsets of rows and columns ####

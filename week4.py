@@ -104,6 +104,8 @@ my_plot.save("figures/scatterplot.png", width=10, height=10, dpi=300)
     alpha = 0.3, color = "blue")
     )
 
+## BREAK
+
 ## Challenge: Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions. What is the advantage of writing code like this?
 my_plot = p9.ggplot(smoke_complete, p9.aes(x="vital_status", y="cigarettes_per_day"))
 (my_plot +

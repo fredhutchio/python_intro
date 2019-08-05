@@ -131,6 +131,8 @@ print(numbers)
 # lists can be string data as well
 organs = ["lung", "breast", "prostate"]
 
+## BREAK
+
 ## Challenge: what google search could you use to determine a method for adding multiple values to a list?
 ## Challenge: how do you remove items from a list?
 
