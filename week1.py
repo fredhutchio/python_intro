@@ -14,7 +14,9 @@
 # sign in using link on HackMD page
 # learner introductions and motivation
 # overview course philosophy:
-#   designed for
+#   designed for researchers who have no prior experience in coding
+#   data-science focused coding
+#   follow along with coding activities, try the challenges
 # course objectives:
 #   intro to python syntax (use of words/symbols to represent things)
 #   importing and manipulating data
