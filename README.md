@@ -11,8 +11,7 @@ This repository is adapted from content originally appearing in
 [Python for Ecologists](https://datacarpentry.org/python-ecology-lesson/),
 Copyright (c) Data Carpentry. 
 
-Software requirements for this course can be found on [fredhutch.io's Software page](http://www.fredhutch.io/software/).
-
+**Required software**: Software requirements for this course can be found on [fredhutch.io's Software page](http://www.fredhutch.io/software/#python). The HackMD (interactive page used for sharing links and information) for this course is here: https://hackmd.io/@k8hertweck/introPython
 
 ## Schedule
 
@@ -20,7 +19,6 @@ Software requirements for this course can be found on [fredhutch.io's Software p
 * Week 2: Using pandas to explore data frames
 * Week 3: Extracting data from data frames
 * Week 4: Data visualization with ggplot
-
 
 ## Resources
 
@@ -34,4 +32,4 @@ supplemental exercises for practice
 * `resources.md` includes useful links mentioned during lessons; additional information about continued learning in Python as 
 well as Hutch-specific resources can be found on the 
 [Data Science Wiki](https://sciwiki.fredhutch.org/bioinformatics/prog_overview/)
-* `hackmdio.txt` is an archive of the [interactive webpage](https://hackmd.io) used during lessons
+* `hackmdio.md` is an archive of the [interactive webpage](https://hackmd.io) used during lessons
