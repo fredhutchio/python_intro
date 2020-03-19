@@ -59,7 +59,10 @@ pd.read_csv("data/clinical.csv")
 clinical_df = pd.read_csv("data/clinical.csv")
 
 # preview data import
-clinical_df.head() # print top few rows
+clinical_df.head() # print top few rows, 10 by default
+clinical_df.head(8) # print top n rows
+clinical_df.tail(20) # print last n rows
+clinical_df.info() # print a summary of all columns, entries, data types and non-null values
 
 ## Challenge: What do you need to do to download and import the following files correctly:
 # example1: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.tsv
