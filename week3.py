@@ -24,6 +24,13 @@ clinical_df = pd.read_csv("data/clinical.csv") # import data as csv file
 clinical_df.head()
 len(clinical_df)
 
+# Sometimes when reading in a long df it gets tricky to remember each column name and where it is by index.
+# You might also want to rename a bunch of columns at some point. To help you remember index and assist in renaming columns 
+# you can use a dictionary comprehension from Week 1 to create a dictionary view of the data:
+
+col_mapping_dict = {c[0]:c[1] for c in enumerate(clinical_df.columns)}
+print(col_mapping_dict)
+
 #### Conditional subsetting ####
 
 # motivation: extracting data based on criteria
