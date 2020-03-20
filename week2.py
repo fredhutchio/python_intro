@@ -59,7 +59,10 @@ pd.read_csv("data/clinical.csv")
 clinical_df = pd.read_csv("data/clinical.csv")
 
 # preview data import
-clinical_df.head() # print top few rows
+clinical_df.head() # print top few rows, 10 by default
+clinical_df.head(8) # print top n rows
+clinical_df.tail(20) # print last n rows
+clinical_df.info() # print a summary of all columns, entries, data types and non-null values
 
 ## Challenge: What do you need to do to download and import the following files correctly:
 # example1: https://raw.githubusercontent.com/fredhutchio/R_intro/master/extra/clinical.tsv
@@ -147,6 +150,26 @@ clinical_df.loc[0, ["primary_diagnosis", "tumor_stage", "age_at_diagnosis"]]
 ## Challenge: how would you extract the last 100 rows for only vital status and days to death?
 clinical_df.loc[6732:, ["vital_status", "days_to_death"]]
 clinical_df.iloc[-100:, [3,5]]
+
+clinical_df.info()
+# Say you have a dataframe with a lot of columns and you want to grab alot of them
+# for your analysis but not all. You can use numpy's R_ to make it easer
+
+import numpy as np # imports numpy and aliases it as "np"
+# Now say you want to get all the rows and columns but 'bcr_patient_barcode'
+
+# clinical_df.iloc[0:, 0:18, 19:20] # this WONT work
+clinical_df.iloc[0:, np.r_[0:18, 19:20] ] # but this does
+
+# We are using numpy's R- which translates slice objects to concatenate along the first axis
+np.r_[0:18, 19:20] # this takes the slices objects and makes an array
+
+# You can then pass that array to iloc like so:
+clinical_df.iloc[0:, np.r_[0:18, 19:20] ].head()
+# This is just an easy way to quickly wrangle large dataframes by columns if need be
+
+# You can also employ this when reading in files as dataframes using the `usecols` parameter like so
+pd.read_csv("data/clinical.txt", sep=" ", usecols=np.r_[0:18, 19:20])
 
 #### Calculating summary statistics ####
 
