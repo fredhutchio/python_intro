@@ -148,6 +148,26 @@ clinical_df.loc[0, ["primary_diagnosis", "tumor_stage", "age_at_diagnosis"]]
 clinical_df.loc[6732:, ["vital_status", "days_to_death"]]
 clinical_df.iloc[-100:, [3,5]]
 
+clinical_df.info()
+# Say you have a dataframe with a lot of columns and you want to grab alot of them
+# for your analysis but not all. You can use numpy's R_ to make it easer
+
+import numpy as np # imports numpy and aliases it as "np"
+# Now say you want to get all the rows and columns but 'bcr_patient_barcode'
+
+# clinical_df.iloc[0:, 0:18, 19:20] # this WONT work
+clinical_df.iloc[0:, np.r_[0:18, 19:20] ] # but this does
+
+# We are using numpy's R- which translates slice objects to concatenate along the first axis
+np.r_[0:18, 19:20] # this takes the slices objects and makes an array
+
+# You can then pass that array to iloc like so:
+clinical_df.iloc[0:, np.r_[0:18, 19:20] ].head()
+# This is just an easy way to quickly wrangle large dataframes by columns if need be
+
+# You can also employ this when reading in files as dataframes using the `usecols` parameter like so
+pd.read_csv("data/clinical.txt", sep=" ", usecols=np.r_[0:18, 19:20])
+
 #### Calculating summary statistics ####
 
 # calculate basic stats for all records in single column
