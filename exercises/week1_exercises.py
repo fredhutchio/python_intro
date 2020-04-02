@@ -1,4 +1,4 @@
-#### Intro to Python: week 1 exercises ####
+#### Intro to Python: class 1 exercises ####
 
 # Introduction to Python and Jupyter Notebooks
 

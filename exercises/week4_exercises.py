@@ -1,4 +1,4 @@
-#### Intro to Python: week 4 exercises ####
+#### Intro to Python: class 4 exercises ####
 
 # Visualizing data
 

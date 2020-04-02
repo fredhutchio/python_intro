@@ -2,7 +2,7 @@
 
 ## Description
 
-Description: This four-week course is designed to introduce attendees to Python programming and its broad applications.
+Description: This four class course is designed to introduce attendees to Python programming and its broad applications.
 Each two hour session will include brief tutorials interspersed with challenge exercises, and assumes attendees have
 no prior computer coding experience. At the end of this course, you will be able to use Python to import, manipulate,
 and visualize data.
@@ -15,18 +15,18 @@ Copyright (c) Data Carpentry.
 
 ## Schedule
 
-* [Week 1](week1.py): Intro to python, jupyter notebooks, and data types
-* [Week 2](week2.py): Using pandas to explore data frames
-* [Week 3](week3.py): Extracting data from data frames
-* [Week 4](week4.ipynb): Data visualization with ggplot
+* [class 1](class1.ipynb): Intro to python, jupyter notebooks, and data types
+* [class 2](class2.ipynb): Using pandas to explore data frames
+* [class 3](class3.ipynb): Extracting data from data frames
+* [class 4](class4.ipynb): Data visualization with ggplot
 
 ## Resources
 
-* Each week's materials are described in the Jupyter notebook prefaced with the number of the week.
+* Each class's materials are described in the Jupyter notebook (`.ipynb`) prefaced with the number of the class.
 * Data used for this lesson are identical to that used in [Introduction to R](https://github.com/fredhutchio/R_intro);
 details on obtaining these data from the [National Cancer Institute's Genomic Data Commons](https://gdc.cancer.gov)
 can be found in that lesson repository.
-* [`exercises/`](exercises) includes a file for each week representing both the aggregated in-class exercises as well as additional
+* [`exercises/`](exercises) includes a file for each class representing both the aggregated in-class exercises as well as additional
 supplemental exercises for practice
 * [`solutions/`](solutions/) includes the solutions for all files in `exercises/`
 * [`instructors.md`](instructors.md) includes information for instructors to facilitate teaching each lesson

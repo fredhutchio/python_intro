@@ -1,4 +1,4 @@
-#### Intro to Python: week 3 exercises ####
+#### Intro to Python: class 3 exercises ####
 
 # Extracting data from data frames
 

@@ -1,4 +1,4 @@
-#### Intro to Python: week 2 exercises ####
+#### Intro to Python: class 2 exercises ####
 
 # Starting with data
 
