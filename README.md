@@ -4,7 +4,7 @@
 
 This four class course is designed to introduce attendees to Python programming and its broad applications.
 Each two hour session will include brief tutorials interspersed with challenge exercises, and assumes attendees have
-no prior computer coding experience. 
+no prior computer coding experience.
 At the end of this course, you will be able to use Python to import, manipulate,
 and visualize data.
 Please see each set of class materials for specific learning objectives.
@@ -31,9 +31,7 @@ Click on the following links to access materials for each class:
 * Data used for this lesson are identical to that used in [Introduction to R](https://github.com/fredhutchio/R_intro);
 details on obtaining these data from the [National Cancer Institute's Genomic Data Commons](https://gdc.cancer.gov)
 can be found in that lesson repository.
-* [`exercises/`](exercises) includes a file for each class representing both the aggregated in-class exercises as well as additional
-supplemental exercises for practice
-* [`solutions/`](solutions/) includes the solutions for all files in `exercises/`
+* [`solutions/`](solutions/) includes the solutions for exercises shown in each class file
 * [`instructors.md`](instructors.md) includes information for instructors to facilitate teaching each lesson
 * [`hackmdio.md`](hackio.md) is an archive of the [interactive webpage](https://hackmd.io) used during lessons
 * Information about use of Python and Jupyter notebooks at Fred Hutch is available on the [Data Science Wiki](https://sciwiki.fredhutch.org/scicomputing/software_python/)
