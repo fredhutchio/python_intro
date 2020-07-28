@@ -10,3 +10,14 @@ import urllib.request
 urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/python_intro/master/extra/birth_reduced.csv", "data/birth_reduced.csv")
 urllib.request.urlretrieve("https://raw.githubusercontent.com/fredhutchio/python_intro/master/extra/smoke_complete.csv", "data/smoke_complete.csv")
 ```
+
+## Breaks
+
+It's useful to administer a break with a challenge exercise.
+The following indicates a place that is appropriate in each class to break,
+though this may vary depending on how many technical difficulties and questions participants have.
+
+- class 1: usually with first challenges
+- class 2: with second challenges (part way through "Accessing rows and columns")
+- class 3: challenge before "Visualizing data with pandas"
+- class 4: challenges with boxplots
