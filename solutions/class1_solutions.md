@@ -9,7 +9,7 @@ The value at index position 1 is replaced with 5.
 
 ## Challenge-add
 
-What google search could you use to determine a method for adding multiple values to a list?
+What online search term could you use to determine a method for adding multiple values to a list?
 
 Google search: "append multiple items to list python pandas"
 
