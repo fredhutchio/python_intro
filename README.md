@@ -20,10 +20,10 @@ See links at the bottom of each lesson for specific episodes from Carpentries ma
 
 Click on the following links to access materials for each class:
 
-* [Class 1](class1.ipynb): Intro to python, jupyter notebooks, and data types (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class1.ipynb)
-* [Class 2](class2.ipynb): Using pandas to explore data frames (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class2.ipynb)
-* [Class 3](class3.ipynb): Extracting data from data frames (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class3.ipynb)
-* [Class 4](class4.ipynb): Data visualization with ggplot (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class4.ipynb)
+* [Class 1](class1.ipynb): Intro to python, jupyter notebooks, and data types (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class1.ipynb))
+* [Class 2](class2.ipynb): Using pandas to explore data frames (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class2.ipynb))
+* [Class 3](class3.ipynb): Extracting data from data frames (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class3.ipynb))
+* [Class 4](class4.ipynb): Data visualization with ggplot (if the link does not load, please try [this one](https://nbviewer.jupyter.org/github/fredhutchio/python_intro/blob/master/class4.ipynb))
 
 ## Resources
 
