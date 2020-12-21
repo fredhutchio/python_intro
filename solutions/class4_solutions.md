@@ -1,6 +1,6 @@
 ## Intro to Python, Class 4 Solutions
 
-## Challenge-scatter
+## Challenge-scatterplot
 
 ```python
 (p9.ggplot(data=smoke_complete,
@@ -84,7 +84,7 @@ gender_counts.head()
     )
 ```
 
-## Challenge: 
+## Challenge-axis
 
 Search "tick marks ggplot2", most results will be for R and may need to be adapted!
 One possible solution: https://rstudio-pubs-static.s3.amazonaws.com/3364_d1a578f521174152b46b19d0c83cbe7e.html

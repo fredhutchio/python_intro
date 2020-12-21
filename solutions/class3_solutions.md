@@ -34,10 +34,3 @@ birth_reduced = birth_reduced[-pd.isnull(birth_reduced["vital_status"])]
 # check to see that it worked
 pd.unique(birth_reduced["vital_status"])
 ```
-
-#### Challenge-not-reported
-
-```python
-birth_reduced = birth_reduced[birth_reduced.vital_status != "not reported"]
-pd.unique(birth_reduced["vital_status"])
-```
