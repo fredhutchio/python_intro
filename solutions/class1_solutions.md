@@ -1,15 +1,10 @@
-# Intro to Python
-# Class 1 Solutions
+# Intro to Python, Class 1 Solutions
 
-## Challenge-numbers
-
-What happens when you execute `numbers[1] = 5`?
+#### Challenge-numbers
 
 The value at index position 1 is replaced with 5.
 
-## Challenge-add
-
-What online search term could you use to determine a method for adding multiple values to a list?
+#### Challenge-add
 
 Google search: "append multiple items to list python pandas"
 
@@ -20,9 +15,7 @@ numbers.extend([5, 6, 7])
 print(numbers)
 ```
 
-## Challenge-remove
-
-How do you remove items from a list?
+#### Challenge-remove
 
 The following code removes the first instance of 5 as it appears in the list:
 
@@ -48,16 +41,13 @@ numbers[:] = (value for value in numbers if value != 5)
 print(numbers)
 ```
 
-## Challenge-tuple
-
-What happens when you execute `a_tuple[2] = 5`,
-and why?
+#### Challenge-tuple
 
 The error reports "tuples are immutable",
 meaning once a tuple is created,
 it can't be altered.
 
-## Challenge-applesauce
+#### Challenge-applesauce
 
 ```python
 # print only the values of the rev dictionary to the screen
@@ -70,9 +60,7 @@ for value in rev.values():
     print(value)
 ```
 
-## Challenge-function
-
-Define a new function called `subtract_function` that subtracts d from c and test on numbers of your choice.
+#### Challenge-function
 
 ```python
 # define function
