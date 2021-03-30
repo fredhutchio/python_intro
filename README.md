@@ -21,11 +21,6 @@ work-at-your-own-pace study.
 
 **Required software**: Software requirements for this course can be found on [fredhutch.io's Software page](http://www.fredhutch.io/software/#python). 
 
-This course is adapted from content originally appearing in
-[Python for Ecologists](https://datacarpentry.org/python-ecology-lesson/),
-Copyright (c) Data Carpentry.
-These materials may be useful for additional review and reinforcement of content included here.
-
 ## Class material
 
 Materials for all lessons in this course include:
@@ -57,3 +52,13 @@ modify the relevant `ipynb` file in the
 Data used for this lesson are identical to that used in [Introduction to R](https://fredhutchio.github.io/r_intro);
 details on obtaining these data from the [National Cancer Institute's Genomic Data Commons](https://gdc.cancer.gov)
 can be found in that [lesson repository](https://github.com/fredhutchio/r_intro).
+
+## Acknowledgements
+
+This course is adapted from content originally appearing in
+[Python for Ecologists](https://datacarpentry.org/python-ecology-lesson/),
+Copyright (c) Data Carpentry.
+
+Thank you to Eric Bae, Brianna Odle, and Geet Jodhka,
+high school students from Fred Hutch's [SEP program](https://www.fredhutch.org/en/about/education-outreach/science-education-partnership.html),
+for providing additional challenge exercises for these lessons.

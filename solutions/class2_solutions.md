@@ -85,3 +85,47 @@ This challenge is a bit easier to assess if you print only a portion of the obje
 - `clinical_df.head()` has been modified because `ref_clinical_df` referenced it
 - `ref_clinical_df.head()` was directly altered in our code
 - `true_copy_clinical_df.head()` is the copy of original, and remains unaltered
+
+#### Challenge-first-five
+
+Using `iloc`:
+```python
+clinical_df.iloc[:5 , [0, 1, 2, 3, 13, 19]]
+```
+
+Using `loc`:
+```python
+clinical_df.loc[:4 , ["primary_diagnosis", "tumor_stage", "age_at_diagnosis", "vital_status", "gender", "disease"]]
+```
+
+#### Challenge-summary
+
+There are multiple ways of addressing this problem.
+One possible solution:
+
+```python
+# group by disease
+grouped_data = clinical_df.groupby("disease")
+# group by vital status and summarize
+grouped_data.vital_status.describe()
+```
+
+#### Challenge-last
+
+```python
+test_data[2]
+test_data[-1]
+```
+
+#### Challenge-compare
+
+```python
+# compare minimum age at diagnosis between original clinical and true copy of clinical
+diff_clinical_true = clinical_df.age_at_diagnosis.min() - true_copy_clinical_df.age_at_diagnosis.min()
+# compare minimum age at diagnosis between original clinical and referenced clinical
+diff_clinical_ref = clinical_df.age_at_diagnosis.min() - ref_clinical_df.age_at_diagnosis.min()
+# print difference between original and true copy
+print(diff_clinical_true)
+# print difference between original and referenced data
+print(diff_clinical_ref)
+```
